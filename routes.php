@@ -1,20 +1,15 @@
-<!-- Routes -->
 <?php
 $controllers = array(
-    'pages' => ['index', 'error'],
-    'products' => ['index', 'show'],
+    'pages' => ['home', 'error', 'about'],
+    'login' => ['login'],
 );
 
-// If the controller is not in the array, then it will be set to the error controller
 if (!array_key_exists($controller, $controllers) || !in_array($action, $controllers[$controller])) {
     $controller = 'pages';
     $action = 'error';
 }
 
-// Include the controller file
-include_once('controllers/' . ucfirst($controller) . 'Controller.php');
-
-// Create a new instance of the needed controller
+include_once('./mvc/controllers/' . $controller . 'Controller.php');
 $klass = ucfirst($controller) . 'Controller';
 $controller = new $klass;
 $controller->$action();
