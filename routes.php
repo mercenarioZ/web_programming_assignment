@@ -1,11 +1,12 @@
 <?php
 $controllers = array(
-    'pages' => ['home', 'error', 'about'],
-    'login' => ['login'],
+    'page' => ['index', 'error', 'about'],
+    'user' => ['index'],
+    'product' => ['index', 'show'],
 );
 
 if (!array_key_exists($controller, $controllers) || !in_array($action, $controllers[$controller])) {
-    $controller = 'pages';
+    $controller = 'page';
     $action = 'error';
 }
 

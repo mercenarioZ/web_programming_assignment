@@ -11,8 +11,8 @@ class BaseController
             ob_start();
             require_once($view_file);
             $content = ob_get_clean();
-            if ($this->folder == 'login') {
-                require_once('./mvc/views/layouts/login.php');
+            if ($this->folder == 'user') {
+                require_once('./mvc/views/layouts/user.php');
                 return;
             }
 

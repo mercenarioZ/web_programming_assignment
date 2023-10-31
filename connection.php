@@ -1,5 +1,4 @@
 <?php
-
 class DB
 {
     private static $instance = NULL;
@@ -8,7 +7,7 @@ class DB
     {
         if (!isset(self::$instance)) {
             try {
-                self::$instance = new PDO('mysql:host=localhost;dbname=blog_db', 'root', '');
+                self::$instance = new PDO('mysql:host=localhost;dbname=shop_db', 'root', '');
                 self::$instance->exec("SET NAMES 'utf8'");
             } catch (PDOException $ex) {
                 die($ex->getMessage());

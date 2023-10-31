@@ -1,15 +1,15 @@
 <?php
 require_once('connection.php');
 
-if (isset($_GET['controller'])) {
-    $controller = $_GET['controller'];
-    if (isset($_GET['action'])) {
-        $action = $_GET['action'];
+if (isset($_REQUEST['controller'])) {
+    $controller = $_REQUEST['controller'];
+    if (isset($_REQUEST['action'])) {
+        $action = $_REQUEST['action'];
     } else {
-        $action = 'home';
+        $action = 'index';
     }
 } else {
-    $controller = 'pages';
-    $action = 'home';
+    $controller = 'page';
+    $action = 'index';
 }
 require_once('routes.php');
