@@ -1,5 +1,5 @@
 <div class="container pt-5 align-middle">
-    <h1 class="text-primary text-center">Login into Shopeww</h1>
+    <h1 class="text-primary text-center">Login into <span style="color: #FF5B00">Shopeww</span></h1>
 
     <form>
         <div class="mb-3">
@@ -15,5 +15,5 @@
     </form>
     <div class="mt-3">Don't have any account? <a
             href="<?php echo WEB_ROOT ?>/index.php?controller=user&action=register">Register</a></div>
-    <div class="mt-3"><a href="<?php echo WEB_ROOT ?>">Back to home</a></div>
+    <div class="mt-3"><a href="<?php echo WEB_ROOT ?>">Back to home page</a></div>
 </div>

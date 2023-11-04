@@ -14,7 +14,8 @@
             integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
             crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-        <title>PHP MVC Main Layout</title>
+        <title>Shopeww</title>
+        <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
 
         <style>
             * {
@@ -52,6 +53,10 @@
             div#auth>a:hover {
                 color: #ff0000;
             }
+
+            .auth-btn {
+                font-size: 1.15rem;
+            }
         </style>
 
     </head>
@@ -63,19 +68,13 @@
         <nav id="header">
             <div class="d-flex justify-content-between me-2">
                 <div class="ms-3 fw-bold fs-2">
-
-                    <a href="<?php echo $web_root ?>/index.php"><i class="fa-shop fa-solid"></i> Shopeww</a>
+                    <a href="<?php echo $web_root ?>/index.php">
+                        <img style="height: 50px; width: auto; margin-bottom: .5rem" src="assets/images/logo.svg"></img>
+                        <span style="color: #FF5B00">Shopeww</span></a>
                 </div>
                 <div id="auth" class="me-3 fs-4">
-                    <a href="<?php echo $web_root ?>/index.php?controller=user&action=register">Register</a>
-                    <a class="ms-3" href="<?php echo $web_root ?>/index.php?controller=user&action=login">Login</a>
-
-                    <!--                     <a href="index.php"><i class="fa-shop fa-solid"></i> Shopeww</a>
-                </div>
-                <div id="auth" class="me-3 fs-4">
-                    <a href="index.php?controller=user&action=register">Register</a>
-                    <a class="ms-3" href="index.php?controller=user&action=login">Login</a> -->
-
+                    <a class="auth-btn" href="<?php echo $web_root ?>/index.php?controller=user&action=register">Register</a>
+                    <a class="auth-btn ms-3" href="<?php echo $web_root ?>/index.php?controller=user&action=login">Login</a>
                 </div>
             </div>
         </nav>
