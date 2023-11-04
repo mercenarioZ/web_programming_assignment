@@ -10,8 +10,10 @@
             <label for="exampleInputPassword1" class="form-label">Password</label>
             <input type="password" class="form-control" id="exampleInputPassword1">
         </div>
-        
+
         <button type="submit" class="btn btn-primary">Login</button>
-        <a href="index.php?controller=user&action=register">Register account</a>
     </form>
+    <div class="mt-3">Don't have any account? <a
+            href="<?php echo WEB_ROOT ?>/index.php?controller=user&action=register">Register</a></div>
+    <div class="mt-3"><a href="<?php echo WEB_ROOT ?>">Back to home</a></div>
 </div>

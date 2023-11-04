@@ -20,6 +20,9 @@
         </div>
 
         <button type="submit" class="btn btn-primary">Sign up</button>
-        <a href="index.php?controller=user&action=login">Login</a>
+
     </form>
+    <div class="mt-3">Already have an account? <a
+            href="<?php echo WEB_ROOT; ?>/index.php?controller=user&action=login">Login</a></div>
+    <div class="mt-3"><a href="<?php echo WEB_ROOT ?>">Back to home</a></div>
 </div>

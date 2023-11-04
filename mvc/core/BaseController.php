@@ -2,7 +2,6 @@
 class BaseController
 {
     protected $folder;
-
     function render($file, $data = array())
     {
         $view_file = './mvc/views/' . $this->folder . '/' . $file . '.php';
