@@ -11,8 +11,9 @@ class Product
     public $image;
     public $category_id;
     public $created_at;
+    public $seller;
 
-    public function __construct($id, $name, $description, $price, $image, $category_id, $created_at)
+    public function __construct($id, $name, $description, $price, $image, $category_id, $created_at, $seller, $active)
     {
         $this->id = $id;
         $this->name = $name;
@@ -21,6 +22,8 @@ class Product
         $this->image = $image;
         $this->category_id = $category_id;
         $this->created_at = $created_at;
+        $this->seller = $seller;
+        $this->active = ($active !== "false") ? true : false;
     }
 
     public static function all()
@@ -30,7 +33,7 @@ class Product
         $req = $db->query('SELECT * FROM products ORDER BY created_at DESC');
 
         foreach ($req->fetchAll() as $item) {
-            $list[] = new Product($item['id'], $item['name'], $item['description'], $item['price'], $item['image'], $item['category_id'], $item['created_at']);
+            $list[] = new Product($item['id'], $item['name'], $item['description'], $item['price'], $item['image'], $item['category_id'], $item['created_at'], $item['seller'], $item['active']);
         }
 
         return $list;
@@ -43,7 +46,7 @@ class Product
         $req->execute(array('id' => $id));
         $item = $req->fetch();
 
-        return new Product($item['id'], $item['name'], $item['description'], $item['price'], $item['image'], $item['category_id'], $item['created_at']);
+        return new Product($item['id'], $item['name'], $item['description'], $item['price'], $item['image'], $item['category_id'], $item['created_at'], $item['seller'], $item['active']);
     }
 
     public static function findByCategory($category_id)
@@ -54,7 +57,7 @@ class Product
         $req->execute(array('category_id' => $category_id));
 
         foreach ($req->fetchAll() as $item) {
-            $list[] = new Product($item['id'], $item['name'], $item['description'], $item['price'], $item['image'], $item['category_id'], $item['created_at']);
+            $list[] = new Product($item['id'], $item['name'], $item['description'], $item['price'], $item['image'], $item['category_id'], $item['created_at'], $item['seller'], $item['active']);
         }
 
         return $list;
@@ -67,7 +70,7 @@ class Product
         $req->execute(array('name' => $name));
         $item = $req->fetch();
 
-        return new Product($item['id'], $item['name'], $item['description'], $item['price'], $item['image'], $item['category_id'], $item['created_at']);
+        return new Product($item['id'], $item['name'], $item['description'], $item['price'], $item['image'], $item['category_id'], $item['created_at'], $item['seller'], $item['active']);
     }
     public static function findByDescription($description)
     {
@@ -76,7 +79,7 @@ class Product
         $req->execute(array('description' => $description));
         $item = $req->fetch();
 
-        return new Product($item['id'], $item['name'], $item['description'], $item['price'], $item['image'], $item['category_id'], $item['created_at']);
+        return new Product($item['id'], $item['name'], $item['description'], $item['price'], $item['image'], $item['category_id'], $item['created_at'], $item['seller'], $item['active']);
     }
 
     public static function destroy($id) // Delete product by id. This action will completely remove the product from database.
