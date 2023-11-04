@@ -1,7 +1,7 @@
 <?php
 $controllers = array(
     'page' => ['index', 'error', 'about'],
-    'user' => ['index'],
+    'user' => ['login', 'register'],
     'product' => ['index', 'show'],
 );
 

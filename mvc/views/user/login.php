@@ -11,6 +11,7 @@
             <input type="password" class="form-control" id="exampleInputPassword1">
         </div>
         
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary">Login</button>
+        <a href="index.php?controller=user&action=register">Register account</a>
     </form>
 </div>

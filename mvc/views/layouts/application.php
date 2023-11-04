@@ -60,11 +60,19 @@
         <nav id="header">
             <div class="d-flex justify-content-between me-2">
                 <div class="ms-3 fw-bold fs-2">
+
                     <a href="<?php echo $web_root ?>/index.php"><i class="fa-shop fa-solid"></i> Shopeww</a>
                 </div>
                 <div id="auth" class="me-3 fs-4">
                     <a href="#">Register</a>
                     <a class="ms-3" href="<?php echo $web_root ?>/index.php?controller=user">Login</a>
+                  
+<!--                     <a href="index.php"><i class="fa-shop fa-solid"></i> Shopeww</a>
+                </div>
+                <div id="auth" class="me-3 fs-4">
+                    <a href="index.php?controller=user&action=register">Register</a>
+                    <a class="ms-3" href="index.php?controller=user&action=login">Login</a> -->
+
                 </div>
             </div>
         </nav>

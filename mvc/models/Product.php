@@ -12,6 +12,7 @@ class Product
     public $category_id;
     public $created_at;
     public $seller;
+    public $active;
 
     public function __construct($id, $name, $description, $price, $image, $category_id, $created_at, $seller, $active)
     {
@@ -23,7 +24,7 @@ class Product
         $this->category_id = $category_id;
         $this->created_at = $created_at;
         $this->seller = $seller;
-        $this->active = ($active !== "false") ? true : false;
+        $this->active = $active !== "false";
     }
 
     public static function all()
