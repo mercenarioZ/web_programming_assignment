@@ -17,18 +17,4 @@ class UserController extends BaseController
         $data = array('title' => 'Register');
         $this->render('register', $data);
     }
-
-    // public function login()
-    // {
-    //     // $username = $_POST['username'];
-    //     // $password = $_POST['password'];
-    //     // $user = $this->model('UserModel');
-    //     // $result = $user->login($username, $password);
-    //     // if ($result == 1) {
-    //     //     $_SESSION['username'] = $username;
-    //     //     header('Location: index.php?controller=product&action=index');
-    //     // } else {
-    //     //     header('Location: index.php?controller=login&action=index');
-    //     // }
-    // }
 }
