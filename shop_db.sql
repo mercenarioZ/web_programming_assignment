@@ -34,6 +34,8 @@ CREATE TABLE `products` (
   `price` float DEFAULT NULL,
   `image` varchar(255) DEFAULT NULL,
   `category_id` int(10) DEFAULT NULL,
+  `active` boolean DEFAULT 1,
+  `seller` bigint(10) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -41,12 +43,6 @@ CREATE TABLE `products` (
 --
 -- Dumping data for table `products`
 --
-
-INSERT INTO `products` (`id`, `name`, `description`, `price`, `image`, `category_id`, `created_at`, `updated_at`) VALUES
-(1, 'Áo thun', NULL, 80000, NULL, 2, '2023-10-31 14:10:07', '2023-10-31 16:12:08'),
-(2, 'iPhone 8 Plus', NULL, 4500000, NULL, 1, '2023-10-31 14:10:34', '2023-10-31 16:12:08'),
-(3, 'iPhone 14 Pro Max', 'Điện thoại Khang xài', 27000000, NULL, 1, '2023-10-31 14:55:34', '2023-10-31 16:12:08'),
-(4, 'Áo khoác da cá sấu', 'Áo tại shop XYZ', 450000, NULL, 2, '2023-10-31 15:17:46', '2023-10-31 16:12:08');
 
 --
 -- Indexes for dumped tables
