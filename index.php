@@ -12,4 +12,18 @@ if (isset($_REQUEST['controller'])) {
     $controller = 'page';
     $action = 'index';
 }
+
+if (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') {
+    $protocol = 'https://';
+} else {
+    $protocol = 'http://';
+}
+
+$dir = str_replace('\\', '/', __DIR__);
+$folder = str_replace(strtolower($_SERVER['DOCUMENT_ROOT']), '', strtolower($dir));
+echo $folder;
+
+$web_root = $protocol . $_SERVER['HTTP_HOST'] . $folder;
+echo '<br>';
+echo $web_root;
 require_once('routes.php');

@@ -9,20 +9,21 @@ class UserController extends BaseController
     }
     public function index()
     {
+        $title = array('title' => 'Login');
         $this->render('index');
     }
 
-    public function login()
-    {
-        // $username = $_POST['username'];
-        // $password = $_POST['password'];
-        // $user = $this->model('UserModel');
-        // $result = $user->login($username, $password);
-        // if ($result == 1) {
-        //     $_SESSION['username'] = $username;
-        //     header('Location: index.php?controller=product&action=index');
-        // } else {
-        //     header('Location: index.php?controller=login&action=index');
-        // }
-    }
+    // public function login()
+    // {
+    //     $username = $_POST['username'];
+    //     $password = $_POST['password'];
+    //     $user = $this->model('UserModel');
+    //     $result = $user->login($username, $password);
+    //     if ($result == 1) {
+    //         $_SESSION['username'] = $username;
+    //         header('Location: index.php?controller=product&action=index');
+    //     } else {
+    //         header('Location: index.php?controller=login&action=index');
+    //     }
+    // }
 }
