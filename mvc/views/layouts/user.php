@@ -13,6 +13,7 @@
             echo $title;
         ?>
     </title>
+
     <style>
         * {
             margin: 0;

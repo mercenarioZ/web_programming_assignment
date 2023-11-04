@@ -17,4 +17,5 @@ class UserController extends BaseController
         $data = array('title' => 'Register');
         $this->render('register', $data);
     }
+
 }
