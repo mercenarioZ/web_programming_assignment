@@ -1,3 +1,5 @@
+<link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon">
+
 <?php
 require_once('connection.php');
 
@@ -19,10 +21,30 @@ if (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') {
     $protocol = 'http://';
 }
 
-$dir = str_replace('\\', '/', __DIR__);
-$folder = str_replace(strtolower($_SERVER['DOCUMENT_ROOT']), '', strtolower($dir));
+$http_host = trim($_SERVER['HTTP_HOST']);
 
-$web_root = $protocol . $_SERVER['HTTP_HOST'] . $folder;
+$dir = str_replace('\\', '/', __DIR__);
+$folder = trim(str_replace(strtolower($_SERVER['DOCUMENT_ROOT']), '', strtolower($dir)));
+
+if (substr($folder, 0, 1) == '/') {
+    $folder = substr($folder, 1);
+}
+
+echo $folder . '<br>';
+echo __DIR__ . '<br>';
+
+if (substr($http_host, -1) != '/') {
+    $http_host .= '/';
+}
+
+$web_root = $protocol . $http_host . $folder;
+
+
+echo $_SERVER['HTTP_HOST'];
+
+echo '<br>';
+
+echo $web_root;
 
 define('WEB_ROOT', $web_root); // Define a global variable for root path
 

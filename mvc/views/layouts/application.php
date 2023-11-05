@@ -15,7 +15,6 @@
             crossorigin="anonymous" referrerpolicy="no-referrer" />
 
         <title>Shopeww</title>
-        <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
 
         <style>
             * {

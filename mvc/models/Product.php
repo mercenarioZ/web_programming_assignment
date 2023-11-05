@@ -1,7 +1,4 @@
 <?php
-
-// Product model
-
 class Product
 {
     public $id;
@@ -40,17 +37,20 @@ class Product
         return $list;
     }
 
-    public static function find($id)
+    public static function findById($id)
     {
         $db = DB::getInstance();
         $req = $db->prepare('SELECT * FROM products WHERE id = :id');
         $req->execute(array('id' => $id));
         $item = $req->fetch();
+        if ($item == null) {
+            return null;
+        }
 
         return new Product($item['id'], $item['name'], $item['description'], $item['price'], $item['image'], $item['category_id'], $item['created_at'], $item['seller'], $item['active']);
     }
 
-    public static function findByCategory($category_id)
+    public static function findByCategoryId($category_id)
     {
         $list = [];
         $db = DB::getInstance();
@@ -88,5 +88,21 @@ class Product
         $db = DB::getInstance();
         $req = $db->prepare('DELETE FROM products WHERE id = :id');
         $req->execute(array('id' => $id));
+    }
+
+    public static function update($id, $name, $description, $price, $image, $category_id, $seller, $active) // Update product by id.
+    {
+        $db = DB::getInstance();
+        $req = $db->prepare('UPDATE products SET name = :name, description = :description, price = :price, image = :image, category_id = :category_id, seller = :seller, active = :active WHERE id = :id');
+        $req->execute(array(
+            'id' => $id,
+            'name' => $name,
+            'description' => $description,
+            'price' => $price,
+            'image' => $image,
+            'category_id' => $category_id,
+            'seller' => $seller,
+            'active' => $active
+        ));
     }
 }

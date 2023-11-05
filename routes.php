@@ -2,7 +2,8 @@
 $controllers = array(
     'page' => ['index', 'error', 'about'],
     'user' => ['login', 'register'],
-    'product' => ['index', 'show'],
+    'product' => ['index', 'show', 'store', 'filter'],
+    'category' => ['index', 'show', 'store'],
 );
 
 if (!array_key_exists($controller, $controllers) || !in_array($action, $controllers[$controller])) {
