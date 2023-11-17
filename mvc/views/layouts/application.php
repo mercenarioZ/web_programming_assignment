@@ -1,5 +1,5 @@
 <DOCTYPE html>
-    <html>
+    <html lang="en">
 
     <head>
         <meta charset="utf-8">
@@ -13,6 +13,8 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
             integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
             crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
 
         <title>Sheepo</title>
 
@@ -32,14 +34,14 @@
             }
 
             #footer {
-                position: fixed;
+                position: relative;
                 bottom: 0;
                 text-align: center;
                 font-size: 1.5rem;
+                opacity: .75;
             }
 
             #header {
-
                 text-align: center;
                 font-size: 1.5rem;
             }
@@ -56,6 +58,11 @@
             .auth-btn {
                 font-size: 1.15rem;
             }
+
+            #content {
+                min-height: calc(100vh - 140px);
+                margin-bottom: 1rem;
+            }
         </style>
 
     </head>
@@ -68,18 +75,25 @@
             <div class="d-flex justify-content-between me-2">
                 <div class="ms-3 fw-bold fs-2">
                     <a href="<?php echo $web_root ?>/index.php">
-                        <img style="height: 50px; width: auto; margin-bottom: .5rem" src="assets/images/logo.svg"></img>
-                        <span style="color: #FF5B00"><?php echo APP_NAME ?></span></a>
+                        <img style="height: 50px; width: auto; margin-bottom: .5rem" src="assets/images/logo.svg" />
+                        <span style="color: #FF5B00">
+                            <?php echo APP_NAME ?>
+                        </span>
+                    </a>
                 </div>
                 <div id="auth" class="me-3 fs-4">
-                    <a class="auth-btn" href="<?php echo $web_root ?>/index.php?controller=user&action=register">Register</a>
-                    <a class="auth-btn ms-3" href="<?php echo $web_root ?>/index.php?controller=user&action=login">Login</a>
+                    <a class="auth-btn"
+                        href="<?php echo $web_root ?>/index.php?controller=user&action=register">Register</a>
+                    <a class="auth-btn ms-3"
+                        href="<?php echo $web_root ?>/index.php?controller=user&action=login">Login</a>
                 </div>
             </div>
         </nav>
+
         <div id="content">
-            <?= @$content ?>
+            <?= $content ?>
         </div>
+
         <div class="d-flex justify-content-end pe-3" id="footer">
             <p class="me-2 fs-6">Copyright &copy; 2023, All Rights reserved</p>
         </div>

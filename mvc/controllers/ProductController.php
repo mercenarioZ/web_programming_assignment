@@ -6,8 +6,8 @@ require_once('./mvc/models/Product.php');
 
 class ProductController extends BaseController
 {
-    private $categoryId = array('1', '2', '3', '4');
-    private $categoryName = array('Consumer Electronics', 'Clothes', 'Shoes', 'Books');
+    // private $categoryId = array('1', '2', '3', '4');
+    // private $categoryName = array('Consumer Electronics', 'Clothes', 'Shoes', 'Books');
 
     public function __construct()
     {
@@ -43,23 +43,54 @@ class ProductController extends BaseController
         $description = isset($_POST['description']) ? $_POST['description'] : null;
         $price = isset($_POST['price']) ? $_POST['price'] : null;
         $image = isset($_FILES['image']) ? $_FILES['image'] : null;
+        $category_id = isset($_POST['category']) ? $_POST['category'] : null;
 
-        // Validate input
-
-        // Handle the image upload
+        // Error handling
         $errors = array();
 
+        // Validate input
+        if (!$name) {
+            $errors['name'] = 'Name is required!';
+        }
+
+        if (!$description) {
+            $errors['description'] = 'Description is required!';
+        }
+
+        if (!$price) {
+            $errors['price'] = 'Price is required!';
+        }
+
+        if (!$image || $image['size'] == 0) {
+            $errors['image'] = 'Image is required!';
+        }
+
+        if ($category_id === 'none' || !$category_id) {
+            $errors['category'] = 'Category is required!';
+        }
+
+        // Handle the image upload
         $file_name = $image['name'];
-        // $file_size = $image['size'];
-        $file_tmp = $image['tmp_name'];
-        $file_type = $image['type'];
-        $exploded = explode('.', $image['name']);
-        $file_ext = strtolower(end($exploded));
+        $file_tmp = $image['tmp_name']; // temporary path of image (it will be deleted after upload)
+        $exploded = explode('.', $image['name']); // explode image name by dot
+        $file_ext = strtolower(end($exploded)); // get the last element of exploded array (file extension)
 
         $extensions = array("jpeg", "jpg", "png");
 
         if (in_array($file_ext, $extensions) === false) {
-            $errors[] = "extension not allowed, please choose a JPEG or PNG file.";
+            $errors['extensions'] = "File extension is not allowed, please choose a JPEG/JPG or PNG file.";
+        }
+
+        if (empty($errors) == true) {
+            move_uploaded_file($file_tmp, "assets/uploads/" . $file_name);
+            $imagePath = "assets/uploads/" . $file_name;
+
+            // Store product to database
+            Product::create($name, $description, $price, $imagePath, $category_id);
+
+            header('Location: index.php?controller=product'); // redirect to product list page after creating new product
+        } else {
+            $this->render('create', array('errors' => $errors));
         }
     }
 

@@ -29,6 +29,15 @@
     .sell-text:hover {
         background-color: rgba(255, 255, 255, 0.4);
     }
+
+    .about-us {
+        font-size: 1.5rem;
+    }
+
+    .about-us:hover {
+        color: #ff0000;
+        border-bottom: 1px solid #ff0000;
+    }
 </style>
 
 <div class="container">
@@ -51,8 +60,8 @@
     </div>
     <div class="row mt-5">
         <div class="col-md-12">
-            <div class="text-center">
-                <a href="<?php echo WEB_ROOT ?>/index.php?controller=page&action=about" class="">
+            <div class="text-center mt-4">
+                <a href="<?php echo WEB_ROOT ?>/index.php?controller=page&action=about" class="about-us">
                     About us
                 </a>
             </div>

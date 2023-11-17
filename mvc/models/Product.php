@@ -50,7 +50,7 @@ class Product
         return new Product($item['id'], $item['name'], $item['description'], $item['price'], $item['image'], $item['category_id'], $item['created_at'], $item['seller'], $item['active']);
     }
 
-    public static function findByCategoryId($category_id)
+    public static function findByCategoryId($category_id) // Filter product by category
     {
         $list = [];
         $db = DB::getInstance();
@@ -83,6 +83,20 @@ class Product
         $db = DB::getInstance();
         $req = $db->prepare('DELETE FROM products WHERE id = :id');
         $req->execute(array('id' => $id));
+    }
+
+    public static function create($name, $description, $price, $image, $category_id) {
+        $db = DB::getInstance();
+        $req = $db->prepare('INSERT INTO products (name, description, price, image, category_id) VALUES (:name, :description, :price, :image, :category_id)');
+        $req->execute(
+            array(
+                'name' => $name,
+                'description' => $description,
+                'price' => $price,
+                'image' => $image,
+                'category_id' => $category_id
+            )
+        );
     }
 
     public static function update($id, $name, $description, $price, $image, $category_id, $seller, $active) // Update product by id.
