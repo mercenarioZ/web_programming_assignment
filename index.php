@@ -44,8 +44,6 @@ define('WEB_ROOT', $web_root); // Define a global variable for root path
 
 define('APP_NAME', 'Sheepo'); // Define a global variable for application name
 
-// echo WEB_ROOT . '/index.php';
-
 require_once('routes.php');
 ?>
 

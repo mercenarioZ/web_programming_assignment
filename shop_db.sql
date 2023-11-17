@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 04, 2023 at 05:17 AM
+-- Generation Time: Nov 17, 2023 at 04:34 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -33,25 +33,25 @@ CREATE TABLE `products` (
   `description` varchar(255) DEFAULT NULL,
   `price` float DEFAULT NULL,
   `image` varchar(255) DEFAULT NULL,
-  `category_id` int(10) DEFAULT NULL,
-  `active` boolean DEFAULT 1,
+  `category_id` varchar(10) DEFAULT NULL,
+  `active` tinyint(1) DEFAULT 1,
   `seller` bigint(10) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-CREATE TABLE `users` (
-  `id` bigint(10) UNSIGNED NOT NULL,
-  `username` varchar(255) DEFAULT NULL,
-  `password` varchar(255) DEFAULT NULL,
-  `email` varchar(255) DEFAULT NULL,
-  `role` boolean DEFAULT 0,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 --
 -- Dumping data for table `products`
 --
+
+INSERT INTO `products` (`id`, `name`, `description`, `price`, `image`, `category_id`, `active`, `seller`, `created_at`, `updated_at`) VALUES
+(5, 'Áo khoác', NULL, 4500000, NULL, 'clothes', 1, NULL, '2023-11-04 09:53:23', '2023-11-17 10:05:17'),
+(6, 'Giày Nike', NULL, 1600000, NULL, 'shoes', 1, NULL, '2023-11-04 12:29:07', '2023-11-17 10:05:22'),
+(7, 'Áo sơ mi', 'Áo sơ mi size XXL', 450000, 'https://pos.nvncdn.net/603305-98807/ps/20220514_SNyW5NxiPa0dPihEpckotfko.JPG', 'clothes', 1, NULL, '2023-11-17 09:09:41', '2023-11-17 10:05:26'),
+(8, 'How the body works', 'Sách khoa học', 190000, 'https://cdn0.fahasa.com/media/catalog/product/i/m/image_192412.jpg', 'books', 1, NULL, '2023-11-17 09:19:52', '2023-11-17 10:05:30'),
+(9, 'nguyenvu', 'fdsgsdfgdsfg', 345545, 'assets/uploads/294737811_5584319494944306_8580794540264765724_n.jpg', 'clothes', 1, NULL, '2023-11-17 11:30:28', '2023-11-17 12:28:04'),
+(10, 'hướng đối tượng', 'gjfhgkjsdf', 1233330, 'assets/uploads/_logoBK.png', 'books', 1, NULL, '2023-11-17 12:28:29', '2023-11-17 12:28:29'),
+(11, 'javascript', 'programming', 2345460, 'assets/uploads/braindownloadmeme.jpg', 'books', 1, NULL, '2023-11-17 12:36:43', '2023-11-17 12:36:43');
 
 --
 -- Indexes for dumped tables
@@ -71,7 +71,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` bigint(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
