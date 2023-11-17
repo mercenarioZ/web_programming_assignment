@@ -6,21 +6,26 @@ require_once('./mvc/models/Product.php');
 
 class ProductController extends BaseController
 {
-    // private $categoryId = array('1', '2', '3', '4');
-    // private $categoryName = array('Consumer Electronics', 'Clothes', 'Shoes', 'Books');
-
     public function __construct()
     {
         $this->folder = 'product';
     }
-    public function index() // get all products
+
+    // get all products
+    public function index() 
     {
-        $products = Product::all();
+        if (isset($_GET['c_id'])) {
+            $category_id = $_GET['c_id'];
+            $products = Product::findByCategoryId($category_id);
+        } else {
+            $products = Product::all();
+        }
         $data = array('products' => $products);
         $this->render('index', $data);
     }
 
-    public function show() // show detail product by id
+    // show detail product by id
+    public function show() 
     {
         $id = isset($_GET['id']) ? $_GET['id'] : null;
         if ($id) {
@@ -37,7 +42,8 @@ class ProductController extends BaseController
         }
     }
 
-    public function store() // create new product
+    // create new product
+    public function store() 
     {
         $name = isset($_POST['name']) ? $_POST['name'] : null;
         $description = isset($_POST['description']) ? $_POST['description'] : null;
@@ -71,9 +77,12 @@ class ProductController extends BaseController
 
         // Handle the image upload
         $file_name = $image['name'];
-        $file_tmp = $image['tmp_name']; // temporary path of image (it will be deleted after upload)
-        $exploded = explode('.', $image['name']); // explode image name by dot
-        $file_ext = strtolower(end($exploded)); // get the last element of exploded array (file extension)
+        // Temporary path of image (it will be deleted after upload)
+        $file_tmp = $image['tmp_name'];
+        // Explode image name by dot
+        $exploded = explode('.', $image['name']);
+        // Get the last element of exploded array (file extension)
+        $file_ext = strtolower(end($exploded));
 
         $extensions = array("jpeg", "jpg", "png");
 
@@ -88,14 +97,15 @@ class ProductController extends BaseController
             // Store product to database
             Product::create($name, $description, $price, $imagePath, $category_id);
 
-            header('Location: index.php?controller=product'); // redirect to product list page after creating new product
+            // Redirect to product list page after creating new product
+            header('Location: index.php?controller=product'); 
         } else {
             $this->render('create', array('errors' => $errors));
         }
     }
 
-
-    public function filter() // filter product by search bar or category
+    // Filter product by search bar or category
+    public function filter()
     {
         $category_id = isset($_GET['c_id']) ? $_GET['c_id'] : null;
         $search_query = isset($_GET['search']) ? $_GET['search'] : null;
@@ -111,10 +121,11 @@ class ProductController extends BaseController
         $data = array(
             'products' => $products
         );
-        $this->render('filter', $data);
+        $this->render('index', $data);
     }
 
-    public function create() // display create new product form
+    // Display create new product form
+    public function create() 
     {
         $this->render('create');
     }

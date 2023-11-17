@@ -31,9 +31,6 @@ if (substr($folder, 0, 1) == '/') {
     $folder = substr($folder, 1);
 }
 
-// echo $folder . '<br>';
-// echo __DIR__ . '<br>';
-
 if (substr($http_host, -1) != '/') {
     $http_host .= '/';
 }
@@ -46,4 +43,3 @@ define('APP_NAME', 'Sheepo'); // Define a global variable for application name
 
 require_once('routes.php');
 ?>
-
