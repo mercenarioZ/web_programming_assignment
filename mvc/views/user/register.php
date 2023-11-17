@@ -1,5 +1,8 @@
 <div class="container pt-5 align-middle">
-    <h1 class="text-primary text-center">Create a <span style="color: #FF5B00">Shopeww</span> account</h1>
+    <h1 class="text-primary text-center">Create a <span style="color: #FF5B00">
+            <?php echo APP_NAME ?>
+        </span> account
+    </h1>
 
     <form>
         <div class="mb-3">

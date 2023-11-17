@@ -64,23 +64,18 @@ class Product
         return $list;
     }
 
-    public static function findByName($name)
+    public static function search($query) // Search product by name or description
     {
+        $list = [];
         $db = DB::getInstance();
-        $req = $db->prepare('SELECT * FROM products WHERE name = :name');
-        $req->execute(array('name' => $name));
-        $item = $req->fetch();
+        $req = $db->prepare('SELECT * FROM products WHERE name LIKE :query OR description LIKE :query');
+        $req->execute(array('query' => "%$query%"));
 
-        return new Product($item['id'], $item['name'], $item['description'], $item['price'], $item['image'], $item['category_id'], $item['created_at'], $item['seller'], $item['active']);
-    }
-    public static function findByDescription($description)
-    {
-        $db = DB::getInstance();
-        $req = $db->prepare('SELECT * FROM products WHERE description = :description');
-        $req->execute(array('description' => $description));
-        $item = $req->fetch();
+        foreach ($req->fetchAll() as $item) {
+            $list[] = new Product($item['id'], $item['name'], $item['description'], $item['price'], $item['image'], $item['category_id'], $item['created_at'], $item['seller'], $item['active']);
+        }
 
-        return new Product($item['id'], $item['name'], $item['description'], $item['price'], $item['image'], $item['category_id'], $item['created_at'], $item['seller'], $item['active']);
+        return $list;
     }
 
     public static function destroy($id) // Delete product by id. This action will completely remove the product from database.
@@ -94,15 +89,17 @@ class Product
     {
         $db = DB::getInstance();
         $req = $db->prepare('UPDATE products SET name = :name, description = :description, price = :price, image = :image, category_id = :category_id, seller = :seller, active = :active WHERE id = :id');
-        $req->execute(array(
-            'id' => $id,
-            'name' => $name,
-            'description' => $description,
-            'price' => $price,
-            'image' => $image,
-            'category_id' => $category_id,
-            'seller' => $seller,
-            'active' => $active
-        ));
+        $req->execute(
+            array(
+                'id' => $id,
+                'name' => $name,
+                'description' => $description,
+                'price' => $price,
+                'image' => $image,
+                'category_id' => $category_id,
+                'seller' => $seller,
+                'active' => $active
+            )
+        );
     }
 }

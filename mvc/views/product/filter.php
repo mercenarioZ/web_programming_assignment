@@ -36,7 +36,8 @@
         <div class="row w-100">
             <ul class="d-flex">
                 <li><a href="<?php echo WEB_ROOT ?>/index.php?controller=product" class="btn">All</a></li>
-                <li><a class="btn" href="<?php echo WEB_ROOT ?>/index.php?controller=product&action=filter&c_id=1">Consumer Electronics</a></li>
+                <li><a class="btn" href="<?php echo WEB_ROOT ?>/index.php?controller=product&action=filter&c_id=1">Consumer Electronics</a>
+                </li>
                 <li><a class="btn" href="<?php echo WEB_ROOT ?>/index.php?controller=product&action=filter&c_id=2">Clothes</a></li>
                 <li><a class="btn" href="<?php echo WEB_ROOT ?>/index.php?controller=product&action=filter&c_id=3">Shoes</a></li>
                 <li><a class="btn" href="<?php echo WEB_ROOT ?>/index.php?controller=product&action=filter&c_id=4">Books</a></li>
@@ -46,6 +47,9 @@
         <!-- Row for product -->
         <div class="row w-100">
             <?php
+            if ($products == null) {
+                echo "<h3 class='mt-3'>There is no product in this category</h3>";
+            } else
             foreach ($products as $item): ?>
                 <div class='col-sm-3 text-center'>
                     <a href='index.php?controller=product&action=show&id=<?php echo $item->id ?>'>
@@ -54,16 +58,15 @@
                                 <img class='img-fluid' src='https://picsum.photos/200' alt='random image'>
                             </div>
                         </div>
-                        <h5><?php echo $item->name ?></h5>
-                        <p>Price: <?php echo $item->price ?></p>
+                        <h5>
+                            <?php echo $item->name ?>
+                        </h5>
+                        <p>Price:
+                            <?php echo $item->price ?>
+                        </p>
                     </a>
                 </div>
             <?php endforeach; ?>
         </div>
     </div>
 </section>
-<!-- 
-<?php
-echo "<pre>";
-print_r($products);
-?> -->

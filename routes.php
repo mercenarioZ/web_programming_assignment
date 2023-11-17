@@ -2,7 +2,7 @@
 $controllers = array(
     'page' => ['index', 'error', 'about'],
     'user' => ['login', 'register'],
-    'product' => ['index', 'show', 'store', 'filter'],
+    'product' => ['index', 'show', 'store', 'filter', 'create'],
     'category' => ['index', 'show', 'store'],
 );
 

@@ -14,7 +14,7 @@
             integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
             crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-        <title>Shopeww</title>
+        <title>Sheepo</title>
 
         <style>
             * {
@@ -69,7 +69,7 @@
                 <div class="ms-3 fw-bold fs-2">
                     <a href="<?php echo $web_root ?>/index.php">
                         <img style="height: 50px; width: auto; margin-bottom: .5rem" src="assets/images/logo.svg"></img>
-                        <span style="color: #FF5B00">Shopeww</span></a>
+                        <span style="color: #FF5B00"><?php echo APP_NAME ?></span></a>
                 </div>
                 <div id="auth" class="me-3 fs-4">
                     <a class="auth-btn" href="<?php echo $web_root ?>/index.php?controller=user&action=register">Register</a>

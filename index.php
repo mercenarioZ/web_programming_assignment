@@ -1,4 +1,5 @@
 <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="assets/css/style.css">
 
 <?php
 require_once('connection.php');
@@ -30,8 +31,8 @@ if (substr($folder, 0, 1) == '/') {
     $folder = substr($folder, 1);
 }
 
-echo $folder . '<br>';
-echo __DIR__ . '<br>';
+// echo $folder . '<br>';
+// echo __DIR__ . '<br>';
 
 if (substr($http_host, -1) != '/') {
     $http_host .= '/';
@@ -39,13 +40,10 @@ if (substr($http_host, -1) != '/') {
 
 $web_root = $protocol . $http_host . $folder;
 
-
-echo $_SERVER['HTTP_HOST'];
-
-echo '<br>';
-
-echo $web_root;
-
 define('WEB_ROOT', $web_root); // Define a global variable for root path
+
+define('APP_NAME', 'Sheepo'); // Define a global variable for application name
+
+// echo WEB_ROOT . '/index.php';
 
 require_once('routes.php');
