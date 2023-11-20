@@ -1,6 +1,4 @@
 <?php
-// Product controller
-
 require_once('./mvc/core/BaseController.php');
 require_once('./mvc/models/Product.php');
 
@@ -11,7 +9,7 @@ class ProductController extends BaseController
         $this->folder = 'product';
     }
 
-    // get all products
+    // Get all products
     public function index() 
     {
         if (isset($_GET['c_id'])) {
@@ -24,7 +22,7 @@ class ProductController extends BaseController
         $this->render('index', $data);
     }
 
-    // show detail product by id
+    // Show detail product by id
     public function show() 
     {
         $id = isset($_GET['id']) ? $_GET['id'] : null;
@@ -43,7 +41,7 @@ class ProductController extends BaseController
     }
 
     // create new product
-    public function store() 
+    public function store()
     {
         $name = isset($_POST['name']) ? $_POST['name'] : null;
         $description = isset($_POST['description']) ? $_POST['description'] : null;
@@ -77,10 +75,13 @@ class ProductController extends BaseController
 
         // Handle the image upload
         $file_name = $image['name'];
+
         // Temporary path of image (it will be deleted after upload)
         $file_tmp = $image['tmp_name'];
+
         // Explode image name by dot
         $exploded = explode('.', $image['name']);
+
         // Get the last element of exploded array (file extension)
         $file_ext = strtolower(end($exploded));
 
@@ -130,3 +131,4 @@ class ProductController extends BaseController
         $this->render('create');
     }
 }
+?>

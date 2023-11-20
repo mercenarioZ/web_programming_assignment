@@ -50,7 +50,8 @@ class Product
         return new Product($item['id'], $item['name'], $item['description'], $item['price'], $item['image'], $item['category_id'], $item['created_at'], $item['seller'], $item['active']);
     }
 
-    public static function findByCategoryId($category_id) // Filter product by category
+    // Filter product by category
+    public static function findByCategoryId($category_id)
     {
         $list = [];
         $db = DB::getInstance();
