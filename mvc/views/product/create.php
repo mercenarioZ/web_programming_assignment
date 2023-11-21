@@ -70,7 +70,7 @@
 
         <div class="form-group">
             <label for="image">Image:</label>
-            <input type="file" class="form-control" id="image" name="image"
+            <input accept=".jpg, .jpeg, .png" type="file" class="form-control" id="image" name="image"
                 value="<?php echo $_POST['image'] ?? null ?>">
 
             <?php if (isset($errors['image'])): ?>
