@@ -1,8 +1,7 @@
 <style>
     .hero-image {
         background-image: url("assets/images/hero.jpg");
-        /* background-color: #cccccc; */
-        min-height: 400px;
+        height: 400px;
         background-position: center;
         background-repeat: no-repeat;
         background-size: contain;
@@ -30,11 +29,11 @@
         background-color: rgba(255, 255, 255, 0.4);
     }
 
-    .about-us {
+    .link {
         font-size: 1.5rem;
     }
 
-    .about-us:hover {
+    .link:hover {
         color: #ff0000;
         border-bottom: 1px solid #ff0000;
     }
@@ -46,7 +45,7 @@
             <div class="hero-image"></div>
 
             <div class="w-60 mx-auto hero-box d-flex flex-column align-items-center">
-                <h1 style="font-size: 2.5rem; margin-bottom: 12px;">Hello, John Doe</h1>
+                <h1 style="font-size: 2.5rem; margin-bottom: 12px;">Hello, <?php echo isset($_SESSION['user']['username']) ? $_SESSION['user']['username'] : 'guest' ?></h1>
                 <button class="btn btn-primary">
                     <a class="text-light" href="<?php echo WEB_ROOT ?>/index.php?controller=product">Shop now</a>
                 </button>
@@ -61,8 +60,14 @@
     <div class="row mt-5">
         <div class="col-md-12">
             <div class="text-center mt-4">
-                <a href="<?php echo WEB_ROOT ?>/index.php?controller=page&action=about" class="about-us">
+                <a href="<?php echo WEB_ROOT ?>/index.php?controller=page&action=about" class="link">
                     About us
+                </a>
+            </div>
+
+            <div class="text-center mt-4">
+                <a href="<?php echo WEB_ROOT ?>/index.php?controller=page&action=profile" class="link">
+                    Go to your profile
                 </a>
             </div>
         </div>

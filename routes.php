@@ -1,9 +1,8 @@
 <?php
 $controllers = array(
-    'page' => ['index', 'error', 'about'],
-    'user' => ['login', 'register'],
+    'page' => ['index', 'error', 'about', 'profile', 'changeUserInfo'],
+    'user' => ['login', 'register', 'logout', 'forgotPassword', 'resetPassword'],
     'product' => ['index', 'show', 'store', 'filter', 'create'],
-    'category' => ['index', 'show', 'store'],
 );
 
 if (!array_key_exists($controller, $controllers) || !in_array($action, $controllers[$controller])) {
