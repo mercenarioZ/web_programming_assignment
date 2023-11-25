@@ -59,10 +59,15 @@
                         <a href='index.php?controller=product&action=show&id=<?php echo $item->id ?>'>
                             <div class='card bg-light mb-2'>
                                 <div class='card-body'>
-                                    <?php if (!isset($item->image)) {
-                                        $item->image = 'assets/uploads/default.jpg';
-                                    } ?>
-                                    <img class='img-fluid img-thumbnail' src='<?php echo $item->image ?>' alt='thumbnail'>
+                                    <?php
+                                    $image = $item->image;
+                                    if (empty($image)) {
+                                        $image = 'assets/uploads/default.jpg';
+                                    } else {
+                                        (!file_exists($image) && !filter_var($image, FILTER_VALIDATE_URL)) ? $image = 'assets/uploads/default.jpg' : $image;
+                                    }
+                                    ?>
+                                    <img class='img-fluid img-thumbnail' src='<?php echo $image ?>' alt='thumbnail'>
                                 </div>
                             </div>
 
