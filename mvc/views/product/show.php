@@ -1,4 +1,3 @@
-
 <style>
     .card {
         width: 450px;
@@ -19,9 +18,12 @@
     }
 </style>
 
-<?php 
-if (!isset($product->image)) {
-    $product->image = 'assets/uploads/default.jpg';
+<?php
+$image = $product->image;
+if (empty($image)) {
+    $image = 'assets/uploads/default.jpg';
+} else {
+    (!file_exists($image) && !filter_var($image, FILTER_VALIDATE_URL)) ? $image = 'assets/uploads/default.jpg' : $image;
 }
 ?>
 
@@ -29,7 +31,7 @@ if (!isset($product->image)) {
     <div class="row">
         <div class="col-sm-6">
             <div class="card">
-                <img class="img-fluid img-thumbnail" src="<?php echo $product->image ?>" alt="no-img">
+                <img class="img-fluid img-thumbnail" src="<?php echo $image ?>" alt="no-img">
             </div>
         </div>
         <div class="col-sm-6">
@@ -52,9 +54,10 @@ if (!isset($product->image)) {
             </p>
 
             <br>
-            
+
             <p>
-                <a href="<?php echo WEB_ROOT ?>/index.php?controller=cart&action=add&id=<?php echo $product->id ?>" class="btn btn-primary">Add to cart</a>
+                <a href="<?php echo WEB_ROOT ?>/index.php?controller=cart&action=add&id=<?php echo $product->id ?>"
+                    class="btn btn-primary">Add to cart</a>
             </p>
         </div>
     </div>
