@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 17, 2023 at 04:34 PM
+-- Generation Time: Nov 26, 2023 at 07:37 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -53,6 +53,32 @@ INSERT INTO `products` (`id`, `name`, `description`, `price`, `image`, `category
 (10, 'hướng đối tượng', 'gjfhgkjsdf', 1233330, 'assets/uploads/_logoBK.png', 'books', 1, NULL, '2023-11-17 12:28:29', '2023-11-17 12:28:29'),
 (11, 'javascript', 'programming', 2345460, 'assets/uploads/braindownloadmeme.jpg', 'books', 1, NULL, '2023-11-17 12:36:43', '2023-11-17 12:36:43');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `id` bigint(10) UNSIGNED NOT NULL,
+  `username` varchar(255) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `role` tinyint(1) DEFAULT 0,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `token` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `username`, `password`, `email`, `role`, `created_at`, `updated_at`, `token`) VALUES
+(21, 'nguyenvudeptrai', '$2y$10$CqzN8YYe9rvMJpGVQj.neuN4oTge6jyeREueoUIWx0G.fJrBeDh9S', 'a@gmail.com', 0, '2023-11-24 15:11:24', '2023-11-24 17:32:49', NULL),
+(22, 'vu.le1352', '$2y$10$wbQLBEO8BPapcOmPL1Nr1O3.clAsv0DpQ1ads0tiSz7SOKl7nMEfi', 'funnystar320@gmail.com', 0, '2023-11-24 15:59:48', '2023-11-24 15:59:48', NULL),
+(23, 'vu.le1352', '$2y$10$d8HhqSTnthBrLpaFnf9spO45HuEf6B9tH2b0wtoRqZaZL5gv9TrP2', 'abc@gmail.com', 0, '2023-11-24 17:37:14', '2023-11-24 17:43:39', NULL);
+
 --
 -- Indexes for dumped tables
 --
@@ -64,6 +90,12 @@ ALTER TABLE `products`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -72,6 +104,12 @@ ALTER TABLE `products`
 --
 ALTER TABLE `products`
   MODIFY `id` bigint(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` bigint(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
