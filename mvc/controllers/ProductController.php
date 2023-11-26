@@ -25,6 +25,8 @@ class ProductController extends BaseController
     // Show detail product by id
     public function show() 
     {
+        // session_start();
+        
         $id = isset($_GET['id']) ? $_GET['id'] : null;
         if ($id) {
             $product = Product::findById($id);

@@ -55,7 +55,7 @@ class PageController extends BaseController
 
 
             if (count($errors) > 0) {
-                $data = array('errors' => $errors, 'username' => $username);
+                $data = array('errors' => $errors, 'username' => $_SESSION['user']['username']);
                 $this->render('profile', $data);
                 return;
             }

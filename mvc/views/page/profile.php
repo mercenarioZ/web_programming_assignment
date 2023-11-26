@@ -22,16 +22,16 @@
 
                     <br>
 
-                    <label for="password">Password</label>
+                    <label for="password">Password (typing your new password)</label>
                     <input class="form-control" type="password" id="password" name="password"
-                        value="<?php echo $password ?>">
+                        value="">
 
                     <br>
 
                     <button class="btn btn-primary mt-4" type="submit">Save changes</button>
                 </form>
 
-                <div>
+                <div class="mt-2">
                     <?php if (isset($errors)): ?>
                         <?php foreach ($errors as $error): ?>
                             <p class="text-danger">
