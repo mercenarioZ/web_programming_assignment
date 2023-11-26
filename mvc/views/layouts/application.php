@@ -1,3 +1,4 @@
+
 <DOCTYPE html>
     <html lang="en">
 
@@ -19,12 +20,6 @@
         <title>Sheepo</title>
 
         <style>
-            * {
-                margin: 0;
-                padding: 0;
-                box-sizing: border-box;
-            }
-
             #header,
             #footer {
                 background-color: whitesmoke;
@@ -34,11 +29,10 @@
             }
 
             #footer {
-                position: relative;
+                position: fixed;
                 bottom: 0;
                 text-align: center;
                 font-size: 1.5rem;
-                opacity: .75;
             }
 
             #header {
@@ -68,29 +62,31 @@
     </head>
 
     <body>
-        <?php
-        global $web_root;
-        ?>
         <nav id="header">
             <div class="d-flex justify-content-between me-2">
                 <div class="ms-3 fw-bold fs-2">
-                    <a href="<?php echo $web_root ?>/index.php">
+                    <a href="<?php echo WEB_ROOT ?>/index.php">
                         <img style="height: 50px; width: auto; margin-bottom: .5rem" src="assets/images/logo.svg" />
                         <span style="color: #FF5B00">
                             <?php echo APP_NAME ?>
                         </span>
                     </a>
                 </div>
+
                 <div id="auth" class="me-3 fs-4">
-                    <a class="auth-btn"
-                        href="<?php echo $web_root ?>/index.php?controller=user&action=register">Register</a>
-                    <a class="auth-btn ms-3"
-                        href="<?php echo $web_root ?>/index.php?controller=user&action=login">Login</a>
+                    <?php if (isset($_SESSION['user'])): ?>
+                        <a class="auth-btn" href="<?php echo WEB_ROOT ?>/index.php?controller=user&action=logout">Logout</a>
+                    <?php else: ?>
+                        <a class="auth-btn"
+                            href="<?php echo WEB_ROOT ?>/index.php?controller=user&action=register">Register</a>
+                        <a class="auth-btn ms-3"
+                            href="<?php echo WEB_ROOT ?>/index.php?controller=user&action=login">Login</a>
+                    <?php endif; ?>
                 </div>
             </div>
         </nav>
 
-        <div id="content">
+        <div style="margin-bottom: 10rem;" id="content">
             <?= $content ?>
         </div>
 

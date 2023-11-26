@@ -50,8 +50,8 @@
         <div class="form-group">
             <label for="price">Category:</label>
             <select class="form-select" name="category">
-                <option value="none" <?php echo isset($_POST['category']) && $_POST['category'] == "none" ? 'selected' : ''; ?>>None
-                </option>
+
+                <option value="none" <?php echo isset($_POST['category']) && $_POST['category'] == "none" ? 'selected' : ''; ?>>None</option>
                 <option value="electronics" <?php echo isset($_POST['category']) && $_POST['category'] == "electronics" ? 'selected' : ''; ?>>Consumer Electronics</option>
                 <option value="clothes" <?php echo isset($_POST['category']) && $_POST['category'] == "clothes" ? 'selected' : ''; ?>>
                     Clothes</option>

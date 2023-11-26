@@ -15,6 +15,10 @@
         height: 280px;
         object-fit: contain;
     }
+
+    .container {
+        
+    }
 </style>
 
 <section class="container">

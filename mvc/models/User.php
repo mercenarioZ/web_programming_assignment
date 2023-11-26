@@ -18,6 +18,7 @@ class User
         $this->role = $role;
     }
 
+    // For admin
     public static function all()
     {
         $list = [];
@@ -31,10 +32,13 @@ class User
         return $list;
     }
 
+    // Find user by id
     public static function find($id)
     {
         $db = DB::getInstance();
-        $req = $db->prepare('SELECT * FROM users WHERE id = :id'); // Use prepared statement (:id and execute() method) to prevent SQL injection. Read more: https://www.w3schools.com/sql/sql_injection.asp
+
+        // Use prepared statement (:id and execute() method) to prevent SQL injection. Read more: https://www.w3schools.com/sql/sql_injection.asp
+        $req = $db->prepare('SELECT * FROM users WHERE id = :id');
         $req->execute(array('id' => $id));
         $item = $req->fetch();
 
@@ -48,7 +52,11 @@ class User
         $req->execute(array('username' => $username));
         $item = $req->fetch();
 
-        return new User($item['id'], $item['username'], $item['password'], $item['email'], $item['role']);
+        if ($item) {
+            return new User($item['id'], $item['username'], $item['password'], $item['email'], $item['role']);
+        } else {
+            return null;
+        }
     }
 
     public static function findByEmail($email)
@@ -58,20 +66,76 @@ class User
         $req->execute(array('email' => $email));
         $item = $req->fetch();
 
-        return new User($item['id'], $item['username'], $item['password'], $item['email'], $item['role']);
+        if ($item) {
+            return new User($item['id'], $item['username'], $item['password'], $item['email'], $item['role']);
+        } else {
+            return null;
+        }
     }
 
-    public static function create($username, $password, $email, $role) // Create new user, role = 0: user, role = 1: admin
+    public static function register($username, $password, $email, $role) // Create new user, role = 0: user, role = 1: admin
     {
+        // Get database instance
         $db = DB::getInstance();
+
+        // Hash password before storing it in database
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
         $req = $db->prepare('INSERT INTO users (username, password, email, role) VALUES (:username, :password, :email, :role)');
-        $req->execute(
+        $result = $req->execute(
             array(
                 'username' => $username,
-                'password' => $password,
+                'password' => $hashedPassword,
                 'email' => $email,
                 'role' => $role
             )
         );
+
+        return $result;
     }
+
+    // public static function saveToken($email, $token)
+    // {
+    //     $db = DB::getInstance();
+    //     $req = $db->prepare('UPDATE users SET token = :token WHERE email = :email');
+    //     $result = $req->execute(
+    //         array(
+    //             'token' => $token,
+    //             'email' => $email
+    //         )
+    //     );
+
+    //     return $result;
+    // }
+
+    // public static function findByToken($token)
+    // {
+    //     $db = DB::getInstance();
+    //     $req = $db->prepare('SELECT * FROM users WHERE token = :token');
+    //     $req->execute(array('token' => $token));
+    //     $item = $req->fetch();
+
+    //     if ($item) {
+    //         return new User($item['id'], $item['username'], $item['password'], $item['email'], $item['role']);
+    //     } else {
+    //         return null;
+    //     }
+    // }
+
+    public static function updateUserInfo($email, $username, $password)
+    {
+        $db = DB::getInstance();
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+        $req = $db->prepare('UPDATE users SET username = :username, password = :password WHERE email = :email');
+        $result = $req->execute(
+            array(
+                'username' => $username,
+                'password' => $hashedPassword,
+                'email' => $email
+            )
+        );
+
+        return $result;
+    }
+
 }
