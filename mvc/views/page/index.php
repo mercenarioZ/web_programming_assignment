@@ -45,12 +45,14 @@
             <div class="hero-image"></div>
 
             <div class="w-60 mx-auto hero-box d-flex flex-column align-items-center">
-                <h1 style="font-size: 2.5rem; margin-bottom: 12px;">Hello, <?php echo isset($_SESSION['user']['username']) ? $_SESSION['user']['username'] : 'guest' ?></h1>
+                <h1 style="font-size: 2.5rem; margin-bottom: 12px;">Hello,
+                    <?php echo isset($_SESSION['user']['username']) ? $_SESSION['user']['username'] : 'guest' ?>
+                </h1>
                 <button class="btn btn-primary">
                     <a class="text-light" href="<?php echo WEB_ROOT ?>/index.php?controller=product">Shop now</a>
                 </button>
 
-                <a class="text-light" href="index.php?controller=product&action=create">
+                <a class="text-light" href=<?php echo isset($_SESSION['user']['username']) ? "index.php?controller=product&action=create" : "index.php?controller=user&action=login" ?>>
                     <p class="sell-text">Do you want to post anything for sale? Click here!</p>
                 </a>
             </div>
