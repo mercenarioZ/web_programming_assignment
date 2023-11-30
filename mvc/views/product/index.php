@@ -1,9 +1,10 @@
 <style>
     .products-container {
         width: 100%;
+        overflow-x: hidden;
     }
 
-    li {
+    .for-md-scr li {
         list-style-type: none;
         border: 1px solid black;
         margin-right: 10px;
@@ -11,14 +12,16 @@
     }
 
     .card-body img {
-        width: 280px;
-        height: 280px;
+        width: 250px;
+        height: 250px;
         object-fit: contain;
     }
 
-    .container {
-        
+    .card-body {
+        padding: .5rem;
     }
+
+    .container {}
 </style>
 
 <section class="container">
@@ -34,9 +37,9 @@
 </section>
 
 <section class="products-container mt-4">
-    <div class="container">
+    <div class="container h-100">
         <div class="row w-100">
-            <ul class="d-flex">
+            <ul class="d-md-flex d-none for-md-scr">
                 <li><a href="<?php echo WEB_ROOT ?>/index.php?controller=product" class="btn">All</a></li>
                 <li><a class="btn"
                         href="<?php echo WEB_ROOT ?>/index.php?controller=product&action=index&c_id=electronics">Consumer
@@ -51,6 +54,29 @@
                         href="<?php echo WEB_ROOT ?>/index.php?controller=product&action=index&c_id=books">Books</a>
                 </li>
             </ul>
+
+            <div  class="dropdown d-block d-md-none">
+                <button class="btn btn-primary dropdown-toggle mb-2" type="button" id="dropdownMenuButton1"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                    Categories
+                </button>
+
+                <ul class="dropdown-menu p-2"
+                    aria-labelledby="dropdownMenuButton1">
+                    <li><a class="dropdown-item"
+                            href="<?php echo WEB_ROOT ?>/index.php?controller=product&action=index&c_id=electronics">Consumer
+                            Electronics</a></li>
+                    <li><a class="dropdown-item"
+                            href="<?php echo WEB_ROOT ?>/index.php?controller=product&action=index&c_id=clothes">Clothes</a>
+                    </li>
+                    <li><a class="dropdown-item"
+                            href="<?php echo WEB_ROOT ?>/index.php?controller=product&action=index&c_id=shoes">Shoes</a>
+                    </li>
+                    <li><a class="dropdown-item"
+                            href="<?php echo WEB_ROOT ?>/index.php?controller=product&action=index&c_id=books">Books</a>
+                    </li>
+                </ul>
+            </div>
         </div>
 
 
@@ -59,7 +85,7 @@
                 echo "<h3 class='mt-3'>Empty</h3>";
             } else {
                 foreach ($products as $item): ?>
-                    <div class='col-6 col-sm-4 col-md-3 text-center'>
+                    <div class='col-sm-6 col-md-4 col-lg-3 col-xs-12 text-center'>
                         <a href='index.php?controller=product&action=show&id=<?php echo $item->id ?>'>
                             <div class='card bg-light mb-2'>
                                 <div class='card-body'>
