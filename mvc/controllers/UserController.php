@@ -1,7 +1,4 @@
 <?php
-
-session_start();
-
 require_once('./mvc/core/BaseController.php');
 require_once('./mvc/models/User.php');
 class UserController extends BaseController
@@ -13,8 +10,13 @@ class UserController extends BaseController
 
     public function login()
     {
+        session_start();
+        if (!empty($_SESSION['user']['username'])) {
+            header('Location: index.php?controller=page');
+        }
         // POST
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
             $email = isset($_POST['email']) ? $_POST['email'] : null;
             $password = isset($_POST['password']) ? $_POST['password'] : null;
 
@@ -25,8 +27,7 @@ class UserController extends BaseController
             $user = User::findByEmail($email);
 
             if ($user !== null && password_verify($password, $user->password)) {
-                session_destroy();
-                session_start();
+                // session_destroy();
                 $_SESSION['user'] = array(
                     'id' => $user->id,
                     'username' => $user->username,
@@ -50,6 +51,10 @@ class UserController extends BaseController
     public function register()
     {
         // Check if request method is POST
+        session_start();
+        if (!empty($_SESSION['user']['username'])) {
+            header('Location: index.php?controller=page');
+        }
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $username = isset($_POST['username']) ? $_POST['username'] : null;
             $password = isset($_POST['password']) ? $_POST['password'] : null;
@@ -106,7 +111,6 @@ class UserController extends BaseController
 
 
             if ($user !== null) {
-                session_start();
                 $_SESSION['user'] = array(
                     'id' => $user,
                     'username' => $username,
@@ -128,6 +132,7 @@ class UserController extends BaseController
 
     public function logout()
     {
+        session_start();
         session_destroy();
         header('Location: index.php?controller=page');
     }
