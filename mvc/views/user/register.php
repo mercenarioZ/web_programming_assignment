@@ -1,4 +1,4 @@
-<div class="container pt-5 align-middle">
+<div style="border: 1px solid #ccc; margin-top: 1rem; padding: 1.5rem; border-radius: 8px;" class="container align-middle">
     <h1 class="text-primary text-center">Create a <span style="color: #FF5B00">
             <?php echo APP_NAME ?>
         </span> account
