@@ -54,7 +54,9 @@ class UserController extends BaseController
             $password = isset($_POST['password']) ? $_POST['password'] : null;
             $email = isset($_POST['email']) ? $_POST['email'] : null;
             $password_confirmation = isset($_POST['password_confirmation']) ? $_POST['password_confirmation'] : null;
-
+            // echo isset($_POST['email']);
+            // echo $_POST['email'] . '1';
+            // echo !$username;
             // Array to store errors
             $errors = array();
 
@@ -77,9 +79,6 @@ class UserController extends BaseController
             // Check if password and password confirmation do not match
             if ($password !== $password_confirmation) {
                 $errors['password_match'] = 'Password and password confirmation do not match';
-                $data = array('title' => 'Register', 'errors' => $errors);
-                $this->render('register', $data);
-                return;
             }
 
             // Check if email already exists
@@ -87,7 +86,17 @@ class UserController extends BaseController
             if ($userEmail !== null) {
                 echo "<script>alert('Email already exists!')</script>";
                 $errors['email'] = 'Email already exists';
+            }
+            // Check if username already exists
+            $userEmail = User::findByEmail($username);
+            if ($userEmail !== null) {
+                echo "<script>alert('Email already exists!')</script>";
+                $errors['email'] = 'Email already exists';
+            }
+
+            if (count($errors) > 0) {
                 $data = array('title' => 'Register', 'errors' => $errors);
+                echo "<div class='alert alert-danger'>" . implode(',', $errors) . "</div>";
                 $this->render('register', $data);
                 return;
             }
