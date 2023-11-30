@@ -134,7 +134,15 @@ class User
                 'email' => $email
             )
         );
-
+        session_destroy();
+        session_start();
+        $_SESSION['user'] = array(
+            'username' => $username,
+            'email' => $email,
+            'role' => 0
+        );
+        // echo "<script>alert('Register successfully!')</script>";
+        header('Location: index.php?controller=page');
         return $result;
     }
 
