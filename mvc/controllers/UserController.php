@@ -25,7 +25,8 @@ class UserController extends BaseController
             $user = User::findByEmail($email);
 
             if ($user !== null && password_verify($password, $user->password)) {
-                // session_start();
+                session_destroy();
+                session_start();
                 $_SESSION['user'] = array(
                     'id' => $user->id,
                     'username' => $user->username,

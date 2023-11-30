@@ -10,7 +10,7 @@ class ProductController extends BaseController
     }
 
     // Get all products
-    public function index() 
+    public function index()
     {
         if (isset($_GET['c_id'])) {
             $category_id = $_GET['c_id'];
@@ -23,10 +23,10 @@ class ProductController extends BaseController
     }
 
     // Show detail product by id
-    public function show() 
+    public function show()
     {
         // session_start();
-        
+
         $id = isset($_GET['id']) ? $_GET['id'] : null;
         if ($id) {
             $product = Product::findById($id);
@@ -50,7 +50,9 @@ class ProductController extends BaseController
         $price = isset($_POST['price']) ? $_POST['price'] : null;
         $image = isset($_FILES['image']) ? $_FILES['image'] : null;
         $category_id = isset($_POST['category']) ? $_POST['category'] : null;
-
+        if (!isset($_SESSION['user']['username'])) {
+            header('Location: index.php?controller=user&action=login');
+        }
         // Error handling
         $errors = array();
 
@@ -101,7 +103,7 @@ class ProductController extends BaseController
             Product::create($name, $description, $price, $imagePath, $category_id);
 
             // Redirect to product list page after creating new product
-            header('Location: index.php?controller=product'); 
+            header('Location: index.php?controller=product');
         } else {
             $this->render('create', array('errors' => $errors));
         }
@@ -128,7 +130,7 @@ class ProductController extends BaseController
     }
 
     // Display create new product form
-    public function create() 
+    public function create()
     {
         $this->render('create');
     }

@@ -11,7 +11,7 @@
 <div class="container">
     <h2 class="text-center mt-3">Post a product</h2>
 
-    <form action=<?php echo isset($_SESSION['user']['username']) ? "index.php?controller=product&action=store" : "index.php?controller=user&action=login" ?> method="post" enctype="multipart/form-data">
+    <form action="index.php?controller=product&action=store" method="post" enctype="multipart/form-data">
         <div class="form-group">
             <label for="name">Name:</label>
             <input type="text" class="form-control" id="name" name="name" value="<?php echo $_POST['name'] ?? '' ?>">
