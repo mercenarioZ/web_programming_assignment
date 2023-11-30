@@ -22,9 +22,8 @@
 
                     <br>
 
-                    <label for="password">Password (typing your new password)</label>
-                    <input class="form-control" type="password" id="password" name="password"
-                        value="">
+                    <label for="password">New password</label>
+                    <input class="form-control" type="password" id="password" name="password" value="">
 
                     <br>
 

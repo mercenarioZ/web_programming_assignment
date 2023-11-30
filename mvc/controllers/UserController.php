@@ -131,7 +131,10 @@ class UserController extends BaseController
         session_destroy();
         header('Location: index.php?controller=page');
     }
-
+    public function forgotPassword() // add to avoid error. delete later
+    {
+        header('Location: index.php?controller=page&action=error');
+    }
     // Have not done yet
     // public function forgotPassword()
     // {

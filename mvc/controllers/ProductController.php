@@ -1,7 +1,6 @@
 <?php
 require_once('./mvc/core/BaseController.php');
 require_once('./mvc/models/Product.php');
-
 class ProductController extends BaseController
 {
     public function __construct()
@@ -45,12 +44,13 @@ class ProductController extends BaseController
     // create new product
     public function store()
     {
+        session_start();
         $name = isset($_POST['name']) ? $_POST['name'] : null;
         $description = isset($_POST['description']) ? $_POST['description'] : null;
         $price = isset($_POST['price']) ? $_POST['price'] : null;
         $image = isset($_FILES['image']) ? $_FILES['image'] : null;
         $category_id = isset($_POST['category']) ? $_POST['category'] : null;
-        if (!isset($_SESSION['user']['username'])) {
+        if (empty($_SESSION['user']['username'])) {
             header('Location: index.php?controller=user&action=login');
         }
         // Error handling
