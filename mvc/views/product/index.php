@@ -1,7 +1,7 @@
 <style>
     .products-container {
         width: 100%;
-        overflow-x: hidden;
+        /* overflow-x: hidden; */
     }
 
     .for-md-scr li {
@@ -55,14 +55,13 @@
                 </li>
             </ul>
 
-            <div  class="dropdown d-block d-md-none">
+            <div class="dropdown d-block d-md-none">
                 <button class="btn btn-primary dropdown-toggle mb-2" type="button" id="dropdownMenuButton1"
                     data-bs-toggle="dropdown" aria-expanded="false">
                     Categories
                 </button>
 
-                <ul class="dropdown-menu p-2"
-                    aria-labelledby="dropdownMenuButton1">
+                <ul class="dropdown-menu p-2" aria-labelledby="dropdownMenuButton1">
                     <li><a class="dropdown-item"
                             href="<?php echo WEB_ROOT ?>/index.php?controller=product&action=index&c_id=electronics">Consumer
                             Electronics</a></li>
