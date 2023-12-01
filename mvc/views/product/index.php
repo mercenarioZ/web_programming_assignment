@@ -42,7 +42,7 @@
             <ul class="d-md-flex d-none for-md-scr">
                 <li><a href="<?php echo WEB_ROOT ?>/index.php?controller=product" class="btn">All</a></li>
                 <li><a class="btn"
-                        href="<?php echo WEB_ROOT ?>/index.php?controller=product&action=index&c_id=electronics">Consumer
+                        href="<?php echo WEB_ROOT ?>/index.php?controller=product&action=index&c_id=electronic">Consumer
                         Electronics</a></li>
                 <li><a class="btn"
                         href="<?php echo WEB_ROOT ?>/index.php?controller=product&action=index&c_id=clothes">Clothes</a>
