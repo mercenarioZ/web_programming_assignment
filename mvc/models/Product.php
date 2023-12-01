@@ -86,16 +86,18 @@ class Product
         $req->execute(array('id' => $id));
     }
 
-    public static function create($name, $description, $price, $image, $category_id) {
+    public static function create($name, $description, $price, $image, $category_id, $seller)
+    {
         $db = DB::getInstance();
-        $req = $db->prepare('INSERT INTO products (name, description, price, image, category_id) VALUES (:name, :description, :price, :image, :category_id)');
+        $req = $db->prepare('INSERT INTO products (name, description, price, image, category_id, seller) VALUES (:name, :description, :price, :image, :category_id, :seller)');
         $req->execute(
             array(
                 'name' => $name,
                 'description' => $description,
                 'price' => $price,
                 'image' => $image,
-                'category_id' => $category_id
+                'category_id' => $category_id,
+                'seller' => $seller
             )
         );
     }

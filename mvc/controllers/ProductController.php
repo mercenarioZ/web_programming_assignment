@@ -53,6 +53,7 @@ class ProductController extends BaseController
         if (empty($_SESSION['user']['username'])) {
             header('Location: index.php?controller=user&action=login');
         }
+        $seller = $_SESSION['user']['id'];
         // Error handling
         $errors = array();
 
@@ -75,6 +76,10 @@ class ProductController extends BaseController
 
         if ($category_id === 'none' || !$category_id) {
             $errors['category'] = 'Category is required!';
+        }
+
+        if ($seller === 'none' || !$seller) {
+            $errors['seller'] = 'Seller is required!';
         }
 
         // Handle the image upload
@@ -100,7 +105,7 @@ class ProductController extends BaseController
             $imagePath = "assets/uploads/" . $file_name;
 
             // Store product to database
-            Product::create($name, $description, $price, $imagePath, $category_id);
+            Product::create($name, $description, $price, $imagePath, $category_id, $seller);
 
             // Redirect to product list page after creating new product
             header('Location: index.php?controller=product');
