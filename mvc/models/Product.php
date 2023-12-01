@@ -65,6 +65,20 @@ class Product
         return $list;
     }
 
+    public static function findByUserId($seller)
+    {
+        $list = [];
+        $db = DB::getInstance();
+        $req = $db->prepare('SELECT * FROM products WHERE seller = :seller');
+        $req->execute(array('seller' => $seller));
+
+        foreach ($req->fetchAll() as $item) {
+            $list[] = new Product($item['id'], $item['name'], $item['description'], $item['price'], $item['image'], $item['category_id'], $item['created_at'], $item['seller'], $item['active']);
+        }
+
+        return $list;
+    }
+
     public static function search($query) // Search product by name or description
     {
         $list = [];
