@@ -21,6 +21,19 @@ class ProductController extends BaseController
         $this->render('index', $data);
     }
 
+    public function list()
+    {
+        session_start();
+        if (isset($_GET['c_id'])) {
+            $category_id = $_GET['c_id'];
+            $products = Product::findByCategoryIdList($category_id);
+        } else {
+            $products = Product::findByUserId($_SESSION['user']['id']);
+        }
+        $data = array('products' => $products);
+        $this->render('list', $data);
+    }
+
     // Show detail product by id
     public function show()
     {

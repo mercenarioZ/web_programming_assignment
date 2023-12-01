@@ -64,7 +64,19 @@ class Product
 
         return $list;
     }
+    public static function findByCategoryIdList($category_id)
+    {
+        $list = [];
+        $db = DB::getInstance();
+        $req = $db->prepare('SELECT * FROM products WHERE category_id = :category_id AND seller = :seller');
+        $req->execute(array('category_id' => $category_id, 'seller' => $_SESSION['user']['id']));
 
+        foreach ($req->fetchAll() as $item) {
+            $list[] = new Product($item['id'], $item['name'], $item['description'], $item['price'], $item['image'], $item['category_id'], $item['created_at'], $item['seller'], $item['active']);
+        }
+
+        return $list;
+    }
     public static function findByUserId($seller)
     {
         $list = [];
