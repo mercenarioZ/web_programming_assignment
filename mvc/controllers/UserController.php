@@ -129,6 +129,20 @@ class UserController extends BaseController
         session_destroy();
         header('Location: index.php?controller=page');
     }
+    public function updateAmountItems()
+    {
+        session_start();
+        User::updateAmountItemsUser($_SESSION['user']['email']);
+        $user = User::findByEmail($_SESSION['user']['email']);
+        $_SESSION['user'] = array(
+            'id' => $user->id,
+            'username' => $user->username,
+            'email' => $user->email,
+            'role' => $user->role,
+            'amountItems' => $user->amountItems
+        );
+        header('Location: index.php?controller=page');
+    }
     public function forgotPassword() // add to avoid error. delete later
     {
         header('Location: index.php?controller=page&action=error');

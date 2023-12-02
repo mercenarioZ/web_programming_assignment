@@ -56,7 +56,7 @@ if (empty($image)) {
             <br>
 
             <p>
-                <a href="<?php echo WEB_ROOT ?>/index.php?controller=cart&action=add&id=<?php echo $product->id ?>"
+                <a href="<?php echo WEB_ROOT ?>/index.php?controller=user&action=updateAmountItems&id=<?php echo $product->id ?>"
                     class="btn btn-primary">Add to cart</a>
             </p>
         </div>

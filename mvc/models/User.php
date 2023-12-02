@@ -128,5 +128,18 @@ class User
         header('Location: index.php?controller=page');
         return $result;
     }
-
+    public static function updateAmountItemsUser($email)
+    {
+        $db = DB::getInstance();
+        $user = User::findByEmail($email);
+        $req = $db->prepare('UPDATE users SET amountItems = :amountItems WHERE email = :email');
+        $result = $req->execute(
+            array(
+                'amountItems' => $user->amountItems + 1,
+                'email' => $email
+            )
+        );
+        header('Location: index.php?controller=page');
+        return $result;
+    }
 }

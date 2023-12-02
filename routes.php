@@ -1,7 +1,7 @@
 <?php
 $controllers = array(
     'page' => ['index', 'error', 'about', 'profile', 'changeUserInfo'],
-    'user' => ['login', 'register', 'logout', 'forgotPassword', 'resetPassword'],
+    'user' => ['login', 'register', 'logout', 'forgotPassword', 'resetPassword', 'updateAmountItems'],
     'product' => ['index', 'show', 'store', 'filter', 'create', 'list', 'cart', 'checkout'],
 );
 
