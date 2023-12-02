@@ -64,7 +64,14 @@ class PageController extends BaseController
 
             // Update user info in the database
             $user = User::updateUserInfo($email, $username, $password);
+            session_start();
+            $_SESSION['user'] = array(
+                'username' => $username,
+                'email' => $email,
+                'role' => $_SESSION['user']['role'],
+                'amountItems' => $_SESSION['user']['amountItems']
 
+            );
             if ($user !== null) {
                 // User info updated successfully
                 // Redirect to a success page or perform any other actions

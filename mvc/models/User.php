@@ -8,14 +8,16 @@ class User
     public $password;
     public $email;
     public $role;
+    public $amountItems;
 
-    public function __construct($id, $username, $password, $email, $role)
+    public function __construct($id, $username, $password, $email, $role, $amountItems)
     {
         $this->id = $id;
         $this->username = $username;
         $this->password = $password;
         $this->email = $email;
         $this->role = $role;
+        $this->amountItems = $amountItems;
     }
 
     // For admin
@@ -26,7 +28,7 @@ class User
         $req = $db->query('SELECT * FROM users');
 
         foreach ($req->fetchAll() as $item) {
-            $list[] = new User($item['id'], $item['username'], $item['password'], $item['email'], $item['role']);
+            $list[] = new User($item['id'], $item['username'], $item['password'], $item['email'], $item['role'], $item['amountItems']);
         }
 
         return $list;
@@ -42,7 +44,7 @@ class User
         $req->execute(array('id' => $id));
         $item = $req->fetch();
 
-        return new User($item['id'], $item['username'], $item['password'], $item['email'], $item['role']);
+        return new User($item['id'], $item['username'], $item['password'], $item['email'], $item['role'], $item['amountItems']);
     }
 
     public static function findByUsername($username)
@@ -53,7 +55,7 @@ class User
         $item = $req->fetch();
 
         if ($item) {
-            return new User($item['id'], $item['username'], $item['password'], $item['email'], $item['role']);
+            return new User($item['id'], $item['username'], $item['password'], $item['email'], $item['role'], $item['amountItems']);
         } else {
             return null;
         }
@@ -67,26 +69,27 @@ class User
         $item = $req->fetch();
 
         if ($item) {
-            return new User($item['id'], $item['username'], $item['password'], $item['email'], $item['role']);
+            return new User($item['id'], $item['username'], $item['password'], $item['email'], $item['role'], $item['amountItems']);
         } else {
             return null;
         }
     }
 
-    public static function register($username, $password, $email, $role) // Create new user, role = 0: user, role = 1: admin
+    public static function register($username, $password, $email, $role, $amountItems) // Create new user, role = 0: user, role = 1: admin
     {
         // Get database instance
         $db = DB::getInstance();
 
         // Hash password before storing it in database
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-        $req = $db->prepare('INSERT INTO users (username, password, email, role) VALUES (:username, :password, :email, :role)');
+        $req = $db->prepare('INSERT INTO users (username, password, email, role, amountItems) VALUES (:username, :password, :email, :role, :amountItems)');
         $result = $req->execute(
             array(
                 'username' => $username,
                 'password' => $hashedPassword,
                 'email' => $email,
-                'role' => $role
+                'role' => $role,
+                'amountItems' => $amountItems
             )
         );
         // Return values to controller
@@ -100,7 +103,7 @@ class User
             $user = $req->fetch();
 
             if ($user) {
-                return new User($user['id'], $user['username'], $user['password'], $user['email'], $user['role']);
+                return new User($user['id'], $user['username'], $user['password'], $user['email'], $user['role'], $user['amountItems']);
             } else {
                 return null;
             }
@@ -122,14 +125,6 @@ class User
                 'email' => $email
             )
         );
-        session_destroy();
-        session_start();
-        $_SESSION['user'] = array(
-            'username' => $username,
-            'email' => $email,
-            'role' => 0
-        );
-        // echo "<script>alert('Register successfully!')</script>";
         header('Location: index.php?controller=page');
         return $result;
     }

@@ -36,6 +36,7 @@ CREATE TABLE `products` (
   `category_id` varchar(10) DEFAULT NULL,
   `active` tinyint(1) DEFAULT 1,
   `seller` bigint(10) DEFAULT NULL,
+  -- `customer` JSON DEFAULT '[]',// testing
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -65,6 +66,7 @@ CREATE TABLE `users` (
   `password` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
   `role` tinyint(1) DEFAULT 0,
+  `amountItems` tinyint(1) DEFAULT 0,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `token` varchar(255) DEFAULT NULL
@@ -74,10 +76,9 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `password`, `email`, `role`, `created_at`, `updated_at`, `token`) VALUES
-(21, 'nguyenvudeptrai', '$2y$10$CqzN8YYe9rvMJpGVQj.neuN4oTge6jyeREueoUIWx0G.fJrBeDh9S', 'a@gmail.com', 0, '2023-11-24 15:11:24', '2023-11-24 17:32:49', NULL),
-(22, 'vu.le1352', '$2y$10$wbQLBEO8BPapcOmPL1Nr1O3.clAsv0DpQ1ads0tiSz7SOKl7nMEfi', 'funnystar320@gmail.com', 0, '2023-11-24 15:59:48', '2023-11-24 15:59:48', NULL),
-(23, 'vu.le1352', '$2y$10$d8HhqSTnthBrLpaFnf9spO45HuEf6B9tH2b0wtoRqZaZL5gv9TrP2', 'abc@gmail.com', 0, '2023-11-24 17:37:14', '2023-11-24 17:43:39', NULL);
+INSERT INTO `users` (`id`, `username`, `password`, `email`, `role`, `amountItems`, `created_at`, `updated_at`, `token`) VALUES
+(21, 'khang', '$2y$10$CqzN8YYe9rvMJpGVQj.neuN4oTge6jyeREueoUIWx0G.fJrBeDh9S', 'quangkhangvnvn@gmail.com', 0, 0, '2023-11-24 15:11:24', '2023-11-24 17:32:49', NULL),
+(22, 'khang2', '$2y$10$CqzN8YYe9rvMJpGVQj.neuN4oTge6jyeREueoUIWx0G.fJrBeDh9S', 'quangkhangvnvn@gmail.com', 0, 0, '2023-11-24 15:11:24', '2023-11-24 17:32:49', NULL);
 
 --
 -- Indexes for dumped tables

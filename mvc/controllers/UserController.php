@@ -31,7 +31,8 @@ class UserController extends BaseController
                     'id' => $user->id,
                     'username' => $user->username,
                     'email' => $user->email,
-                    'role' => 0
+                    'role' => $user->role,
+                    'amountItems' => $user->amountItems
                 );
 
                 header('Location: index.php?controller=page');
@@ -98,7 +99,7 @@ class UserController extends BaseController
                 return;
             }
 
-            $user = User::register($username, $password, $email, 0);
+            $user = User::register($username, $password, $email, 0, 0);
 
 
             if ($user !== null) {
@@ -106,7 +107,8 @@ class UserController extends BaseController
                     'id' => $user->id,
                     'username' => $user->username,
                     'email' => $user->email,
-                    'role' => 0
+                    'role' => $user->role,
+                    'amountItems' => $user->amountItems
                 );
                 // echo "<script>alert('Register successfully!')</script>";
                 header('Location: index.php?controller=page');
