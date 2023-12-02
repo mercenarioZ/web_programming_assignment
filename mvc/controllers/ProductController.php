@@ -34,6 +34,12 @@ class ProductController extends BaseController
         $this->render('list', $data);
     }
 
+    public function checkout()
+    {
+        $data = array('products' => '');
+        $this->render('checkout', $data);
+    }
+
     // Show detail product by id
     public function show()
     {
@@ -66,7 +72,8 @@ class ProductController extends BaseController
         if (empty($_SESSION['user']['username'])) {
             header('Location: index.php?controller=user&action=login');
         }
-        $seller = $_SESSION['user']['id'];
+        // $seller = $_SESSION['user']['id'];
+        $seller = isset($_SESSION['user']['id']) ? $_SESSION['user']['id'] : null;
         // Error handling
         $errors = array();
 
@@ -91,7 +98,7 @@ class ProductController extends BaseController
             $errors['category'] = 'Category is required!';
         }
 
-        if ($seller === 'none' || !$seller) {
+        if (!$seller) {
             $errors['seller'] = 'Seller is required!';
         }
 
