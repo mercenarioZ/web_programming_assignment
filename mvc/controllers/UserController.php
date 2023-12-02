@@ -129,10 +129,10 @@ class UserController extends BaseController
         session_destroy();
         header('Location: index.php?controller=page');
     }
-    public function updateAmountItems()
+    public function addItems()
     {
         session_start();
-        User::updateAmountItemsUser($_SESSION['user']['email']);
+        User::addToCartUser($_SESSION['user']['email'], $_GET['id']);
         $user = User::findByEmail($_SESSION['user']['email']);
         $_SESSION['user'] = array(
             'id' => $user->id,

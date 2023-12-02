@@ -130,14 +130,20 @@ class User
         header('Location: index.php?controller=page');
         return $result;
     }
-    public static function updateAmountItemsUser($email)
+    public static function addToCartUser($email, $idProduct)
     {
         $db = DB::getInstance();
         $user = User::findByEmail($email);
-        $req = $db->prepare('UPDATE users SET amountItems = :amountItems WHERE email = :email');
+        $productsInCart = json_decode($user->productsInCart, true);
+        if (!is_array($productsInCart)) {
+            $productsInCart = [];
+        }
+        $productsInCart[] = $idProduct;
+        $req = $db->prepare('UPDATE users SET amountItems = :amountItems, productsInCart = :productsInCart WHERE email = :email');
         $result = $req->execute(
             array(
                 'amountItems' => $user->amountItems + 1,
+                'productsInCart' => json_encode($productsInCart),
                 'email' => $email
             )
         );
