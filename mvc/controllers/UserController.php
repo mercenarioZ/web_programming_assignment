@@ -70,7 +70,7 @@ class UserController extends BaseController
             }
 
             if (!$password || strlen($password) < 6) {
-                $errors['password'] = 'Password is invalid';
+                $errors['password'] = 'Password is required and must be at least 6 characters long';
             }
 
             if (!$email) {

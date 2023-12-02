@@ -9,8 +9,9 @@ class User
     public $email;
     public $role;
     public $amountItems;
+    public $productsInCart;
 
-    public function __construct($id, $username, $password, $email, $role, $amountItems)
+    public function __construct($id, $username, $password, $email, $role, $amountItems, $productsInCart)
     {
         $this->id = $id;
         $this->username = $username;
@@ -18,6 +19,7 @@ class User
         $this->email = $email;
         $this->role = $role;
         $this->amountItems = $amountItems;
+        $this->productsInCart = $productsInCart;
     }
 
     // For admin
@@ -28,7 +30,7 @@ class User
         $req = $db->query('SELECT * FROM users');
 
         foreach ($req->fetchAll() as $item) {
-            $list[] = new User($item['id'], $item['username'], $item['password'], $item['email'], $item['role'], $item['amountItems']);
+            $list[] = new User($item['id'], $item['username'], $item['password'], $item['email'], $item['role'], $item['amountItems'], $item['productsInCart']);
         }
 
         return $list;
@@ -44,7 +46,7 @@ class User
         $req->execute(array('id' => $id));
         $item = $req->fetch();
 
-        return new User($item['id'], $item['username'], $item['password'], $item['email'], $item['role'], $item['amountItems']);
+        return new User($item['id'], $item['username'], $item['password'], $item['email'], $item['role'], $item['amountItems'], $item['productsInCart']);
     }
 
     public static function findByUsername($username)
@@ -55,7 +57,7 @@ class User
         $item = $req->fetch();
 
         if ($item) {
-            return new User($item['id'], $item['username'], $item['password'], $item['email'], $item['role'], $item['amountItems']);
+            return new User($item['id'], $item['username'], $item['password'], $item['email'], $item['role'], $item['amountItems'], $item['productsInCart']);
         } else {
             return null;
         }
@@ -69,7 +71,7 @@ class User
         $item = $req->fetch();
 
         if ($item) {
-            return new User($item['id'], $item['username'], $item['password'], $item['email'], $item['role'], $item['amountItems']);
+            return new User($item['id'], $item['username'], $item['password'], $item['email'], $item['role'], $item['amountItems'], $item['productsInCart']);
         } else {
             return null;
         }
@@ -103,7 +105,7 @@ class User
             $user = $req->fetch();
 
             if ($user) {
-                return new User($user['id'], $user['username'], $user['password'], $user['email'], $user['role'], $user['amountItems']);
+                return new User($user['id'], $user['username'], $user['password'], $user['email'], $user['role'], $user['amountItems'], $user['productsInCart']);
             } else {
                 return null;
             }
