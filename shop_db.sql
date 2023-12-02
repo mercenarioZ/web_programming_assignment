@@ -76,7 +76,7 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `password`, `email`, `role`, `amountItems`, `created_at`, `updated_at`, `token`) VALUES
+INSERT INTO `users` (`id`, `username`, `password`, `email`, `role`, `amountItems`, `productsInCart`, `created_at`, `updated_at`, `token`) VALUES
 (21, 'khang', '$2y$10$CqzN8YYe9rvMJpGVQj.neuN4oTge6jyeREueoUIWx0G.fJrBeDh9S', 'quangkhangvnvn@gmail.com', 0, 0, NULL, '2023-11-24 15:11:24', '2023-11-24 17:32:49', NULL),
 (22, 'khang2', '$2y$10$CqzN8YYe9rvMJpGVQj.neuN4oTge6jyeREueoUIWx0G.fJrBeDh9S', 'quangkhangvnvn@gmail.com', 0, 0, NULL, '2023-11-24 15:11:24', '2023-11-24 17:32:49', NULL);
 
