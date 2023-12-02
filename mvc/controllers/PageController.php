@@ -54,7 +54,7 @@ class PageController extends BaseController
             }
 
             if (!$password || strlen($password) < 6) {
-                $errors['password'] = 'Password is required and must be at least 6 characters long';
+                $errors['password'] = 'Password least 6 characters';
             }
 
             if (count($errors) > 0) {

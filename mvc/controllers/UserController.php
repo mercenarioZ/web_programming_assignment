@@ -32,7 +32,7 @@ class UserController extends BaseController
                     'username' => $user->username,
                     'email' => $user->email,
                     'role' => $user->role,
-                    'amountItems' => $user->amountItems
+                    'amountItems' => count(json_decode($user->productsInCart, true))
                 );
 
                 header('Location: index.php?controller=page');
@@ -70,7 +70,7 @@ class UserController extends BaseController
             }
 
             if (!$password || strlen($password) < 6) {
-                $errors['password'] = 'Password is required and must be at least 6 characters long';
+                $errors['password'] = 'Password least 6 characters long';
             }
 
             if (!$email) {
@@ -99,7 +99,7 @@ class UserController extends BaseController
                 return;
             }
 
-            $user = User::register($username, $password, $email, 0, 0);
+            $user = User::register($username, $password, $email, 0);
 
 
             if ($user !== null) {
@@ -108,7 +108,7 @@ class UserController extends BaseController
                     'username' => $user->username,
                     'email' => $user->email,
                     'role' => $user->role,
-                    'amountItems' => $user->amountItems
+                    'amountItems' => count(json_decode($user->productsInCart, true))
                 );
                 // echo "<script>alert('Register successfully!')</script>";
                 header('Location: index.php?controller=page');
@@ -139,7 +139,7 @@ class UserController extends BaseController
             'username' => $user->username,
             'email' => $user->email,
             'role' => $user->role,
-            'amountItems' => $user->amountItems
+            'amountItems' => count(json_decode($user->productsInCart, true))
         );
         header('Location: index.php?controller=page');
     }

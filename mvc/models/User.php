@@ -8,17 +8,15 @@ class User
     public $password;
     public $email;
     public $role;
-    public $amountItems;
     public $productsInCart;
 
-    public function __construct($id, $username, $password, $email, $role, $amountItems, $productsInCart)
+    public function __construct($id, $username, $password, $email, $role, $productsInCart)
     {
         $this->id = $id;
         $this->username = $username;
         $this->password = $password;
         $this->email = $email;
         $this->role = $role;
-        $this->amountItems = $amountItems;
         $this->productsInCart = $productsInCart;
     }
 
@@ -30,7 +28,7 @@ class User
         $req = $db->query('SELECT * FROM users');
 
         foreach ($req->fetchAll() as $item) {
-            $list[] = new User($item['id'], $item['username'], $item['password'], $item['email'], $item['role'], $item['amountItems'], $item['productsInCart']);
+            $list[] = new User($item['id'], $item['username'], $item['password'], $item['email'], $item['role'], $item['productsInCart']);
         }
 
         return $list;
@@ -46,7 +44,7 @@ class User
         $req->execute(array('id' => $id));
         $item = $req->fetch();
 
-        return new User($item['id'], $item['username'], $item['password'], $item['email'], $item['role'], $item['amountItems'], $item['productsInCart']);
+        return new User($item['id'], $item['username'], $item['password'], $item['email'], $item['role'], $item['productsInCart']);
     }
 
     public static function findByUsername($username)
@@ -57,7 +55,7 @@ class User
         $item = $req->fetch();
 
         if ($item) {
-            return new User($item['id'], $item['username'], $item['password'], $item['email'], $item['role'], $item['amountItems'], $item['productsInCart']);
+            return new User($item['id'], $item['username'], $item['password'], $item['email'], $item['role'], $item['productsInCart']);
         } else {
             return null;
         }
@@ -71,27 +69,26 @@ class User
         $item = $req->fetch();
 
         if ($item) {
-            return new User($item['id'], $item['username'], $item['password'], $item['email'], $item['role'], $item['amountItems'], $item['productsInCart']);
+            return new User($item['id'], $item['username'], $item['password'], $item['email'], $item['role'], $item['productsInCart']);
         } else {
             return null;
         }
     }
 
-    public static function register($username, $password, $email, $role, $amountItems) // Create new user, role = 0: user, role = 1: admin
+    public static function register($username, $password, $email, $role) // Create new user, role = 0: user, role = 1: admin
     {
         // Get database instance
         $db = DB::getInstance();
 
         // Hash password before storing it in database
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-        $req = $db->prepare('INSERT INTO users (username, password, email, role, amountItems) VALUES (:username, :password, :email, :role, :amountItems)');
+        $req = $db->prepare('INSERT INTO users (username, password, email, role) VALUES (:username, :password, :email, :role)');
         $result = $req->execute(
             array(
                 'username' => $username,
                 'password' => $hashedPassword,
                 'email' => $email,
                 'role' => $role,
-                'amountItems' => $amountItems
             )
         );
         // Return values to controller
@@ -105,7 +102,7 @@ class User
             $user = $req->fetch();
 
             if ($user) {
-                return new User($user['id'], $user['username'], $user['password'], $user['email'], $user['role'], $user['amountItems'], $user['productsInCart']);
+                return new User($user['id'], $user['username'], $user['password'], $user['email'], $user['role'], $user['productsInCart']);
             } else {
                 return null;
             }
@@ -139,10 +136,9 @@ class User
             $productsInCart = [];
         }
         $productsInCart[] = $idProduct;
-        $req = $db->prepare('UPDATE users SET amountItems = :amountItems, productsInCart = :productsInCart WHERE email = :email');
+        $req = $db->prepare('UPDATE users SET productsInCart = :productsInCart WHERE email = :email');
         $result = $req->execute(
             array(
-                'amountItems' => $user->amountItems + 1,
                 'productsInCart' => json_encode($productsInCart),
                 'email' => $email
             )
