@@ -81,7 +81,7 @@
                         <!-- Cart icon -->
                         <span class="me-3" style="position: relative">
                             <a href="<?php echo WEB_ROOT ?>/index.php?controller=product">🛒</a>
-                            <span style="display: inline-block; font-size: .8rem; font-weight: bold; position: absolute; bottom: -2; right: 0; background: rgba(255, 91, 0, 0.85); width: 1rem; height: 1rem; line-height: 1rem; border-radius: 50%; color: #fff">3</span>
+                            <span style="display: flex; align-items: center; font-size: .8rem; font-weight: bold; position: absolute; bottom: -3; right: -5; background: rgba(255, 91, 0, 0.75); width: auto; height: 1rem; border-radius: 50%; color: #fff; padding: 6px 4px;">45</span>
                         </span>
                         
                         <a class="auth-btn" href="<?php echo WEB_ROOT ?>/index.php?controller=user&action=logout">Logout</a>
