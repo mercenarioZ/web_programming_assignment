@@ -40,6 +40,14 @@
 </style>
 
 <div class="container">
+    <!-- Using this for debug only -->
+    <!-- <?php
+    if (isset($_SESSION['user']['username'])) {
+        echo "Seller id: " . $_SESSION['user']['id'];
+    } else {
+        echo "Seller id: guest";
+    }
+    ?> -->
     <div class="row">
         <div class="col-md-12">
             <div class="hero-image"></div>

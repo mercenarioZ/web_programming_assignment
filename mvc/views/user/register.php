@@ -1,4 +1,5 @@
-<div style="border: 1px solid #ccc; margin-top: 1rem; padding: 1.5rem; border-radius: 8px;" class="container align-middle">
+<div style="border: 1px solid #ccc; margin-top: 1rem; padding: 1.5rem; border-radius: 8px;"
+    class="container align-middle">
     <h1 class="text-primary text-center">Create a <span style="color: #FF5B00">
             <?php echo APP_NAME ?>
         </span> account
@@ -25,6 +26,12 @@
         <button type="submit" class="btn btn-primary">Sign up</button>
 
     </form>
+
+    <?php if (!empty($errors)): ?>
+            <div class="mt-4 alert alert-danger">
+                <?php echo implode(', ', $errors); ?>
+            </div>
+    <?php endif; ?>
     <div class="mt-3">Already have an account? <a
             href="<?php echo WEB_ROOT; ?>/index.php?controller=user&action=login">Login</a></div>
     <div class="mt-3"><a href="<?php echo WEB_ROOT ?>">Back to home page</a></div>

@@ -1,7 +1,6 @@
 <style>
     .products-container {
         width: 100%;
-        /* overflow-x: hidden; */
     }
 
     .for-md-scr li {
@@ -20,10 +19,9 @@
     .card-body {
         padding: .5rem;
     }
-
-    .container {}
 </style>
 
+<!-- Search bar -->
 <section class="container">
     <div class="search mt-3">
         <form class="d-flex" method="get" action="<?php echo WEB_ROOT ?>/index.php">
@@ -38,6 +36,7 @@
 
 <section class="products-container mt-4">
     <div class="container h-100">
+        <!-- Categories -->
         <div class="row w-100">
             <ul class="d-md-flex d-none for-md-scr">
                 <li><a href="<?php echo WEB_ROOT ?>/index.php?controller=product&action=list" class="btn">All</a></li>
@@ -78,7 +77,10 @@
             </div>
         </div>
 
-
+        <!-- Note -->
+        <div class="alert alert-success text-center fs-5">This page only displays products posted by you</div>
+        
+        <!-- Products -->
         <div class="row w-100">
             <?php if ($products == null) {
                 echo "<h3 class='mt-3'>Empty</h3>";

@@ -27,7 +27,6 @@ class UserController extends BaseController
             $user = User::findByEmail($email);
 
             if ($user !== null && password_verify($password, $user->password)) {
-                // session_destroy();
                 $_SESSION['user'] = array(
                     'id' => $user->id,
                     'username' => $user->username,
@@ -50,19 +49,18 @@ class UserController extends BaseController
 
     public function register()
     {
-        // Check if request method is POST
         session_start();
         if (!empty($_SESSION['user']['username'])) {
             header('Location: index.php?controller=page');
         }
+
+        // Check if request method is POST
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $username = isset($_POST['username']) ? $_POST['username'] : null;
             $password = isset($_POST['password']) ? $_POST['password'] : null;
             $email = isset($_POST['email']) ? $_POST['email'] : null;
             $password_confirmation = isset($_POST['password_confirmation']) ? $_POST['password_confirmation'] : null;
-            // echo isset($_POST['email']);
-            // echo $_POST['email'] . '1';
-            // echo !$username;
+
             // Array to store errors
             $errors = array();
 
@@ -70,8 +68,8 @@ class UserController extends BaseController
                 $errors['username'] = 'Username is required';
             }
 
-            if (!$password) {
-                $errors['password'] = 'Password is required';
+            if (!$password || strlen($password) < 6) {
+                $errors['password'] = 'Password is invalid';
             }
 
             if (!$email) {
@@ -90,19 +88,12 @@ class UserController extends BaseController
             // Check if email already exists
             $userEmail = User::findByEmail($email);
             if ($userEmail !== null) {
-                echo "<script>alert('Email already exists!')</script>";
-                $errors['email'] = 'Email already exists';
-            }
-            // Check if username already exists
-            $userEmail = User::findByEmail($username);
-            if ($userEmail !== null) {
-                echo "<script>alert('Email already exists!')</script>";
                 $errors['email'] = 'Email already exists';
             }
 
             if (count($errors) > 0) {
                 $data = array('title' => 'Register', 'errors' => $errors);
-                echo "<div class='alert alert-danger'>" . implode(',', $errors) . "</div>";
+                // echo "<div class='alert alert-danger'>" . implode(',', $errors) . "</div>";
                 $this->render('register', $data);
                 return;
             }
@@ -112,9 +103,9 @@ class UserController extends BaseController
 
             if ($user !== null) {
                 $_SESSION['user'] = array(
-                    'id' => $user,
-                    'username' => $username,
-                    'email' => $email,
+                    'id' => $user->id,
+                    'username' => $user->username,
+                    'email' => $user->email,
                     'role' => 0
                 );
                 // echo "<script>alert('Register successfully!')</script>";

@@ -50,7 +50,7 @@
                 color: #ff0000;
             }
 
-            .auth-btn {
+            .auth-btn, .seller-btn {
                 font-size: 1.15rem;
             }
 
@@ -76,9 +76,14 @@
 
                 <div id="auth" class="me-3 fs-4">
                     <?php if (isset($_SESSION['user'])): ?>
-                        <a href="<?php echo WEB_ROOT ?>/index.php?controller=product&action=list">Seller
-                            page</a>
-                        <a href="<?php echo WEB_ROOT ?>/index.php?controller=product">🛒</a>
+                        <a class="seller-btn me-3" href="<?php echo WEB_ROOT ?>/index.php?controller=product&action=list">Seller page</a>
+
+                        <!-- Cart icon -->
+                        <span class="me-3" style="position: relative">
+                            <a href="<?php echo WEB_ROOT ?>/index.php?controller=product">🛒</a>
+                            <span style="display: inline-block; font-size: .8rem; font-weight: bold; position: absolute; bottom: -2; right: 0; background: rgba(255, 91, 0, 0.85); width: 1rem; height: 1rem; line-height: 1rem; border-radius: 50%; color: #fff">3</span>
+                        </span>
+                        
                         <a class="auth-btn" href="<?php echo WEB_ROOT ?>/index.php?controller=user&action=logout">Logout</a>
                     <?php else: ?>
                         <a class="auth-btn"

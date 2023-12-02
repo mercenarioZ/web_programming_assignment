@@ -89,37 +89,25 @@ class User
                 'role' => $role
             )
         );
+        // Return values to controller
+        if ($result) {
+            // Get the last inserted ID
+            $lastId = $db->lastInsertId();
 
-        return $result;
+            // Query the database for the user data
+            $req = $db->prepare('SELECT * FROM users WHERE id = :id');
+            $req->execute(array('id' => $lastId));
+            $user = $req->fetch();
+
+            if ($user) {
+                return new User($user['id'], $user['username'], $user['password'], $user['email'], $user['role']);
+            } else {
+                return null;
+            }
+        } else {
+            return null;
+        }
     }
-
-    // public static function saveToken($email, $token)
-    // {
-    //     $db = DB::getInstance();
-    //     $req = $db->prepare('UPDATE users SET token = :token WHERE email = :email');
-    //     $result = $req->execute(
-    //         array(
-    //             'token' => $token,
-    //             'email' => $email
-    //         )
-    //     );
-
-    //     return $result;
-    // }
-
-    // public static function findByToken($token)
-    // {
-    //     $db = DB::getInstance();
-    //     $req = $db->prepare('SELECT * FROM users WHERE token = :token');
-    //     $req->execute(array('token' => $token));
-    //     $item = $req->fetch();
-
-    //     if ($item) {
-    //         return new User($item['id'], $item['username'], $item['password'], $item['email'], $item['role']);
-    //     } else {
-    //         return null;
-    //     }
-    // }
 
     public static function updateUserInfo($email, $username, $password)
     {
