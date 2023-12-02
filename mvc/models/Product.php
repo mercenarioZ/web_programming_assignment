@@ -64,6 +64,32 @@ class Product
 
         return $list;
     }
+    public static function findByCategoryIdList($category_id)
+    {
+        $list = [];
+        $db = DB::getInstance();
+        $req = $db->prepare('SELECT * FROM products WHERE category_id = :category_id AND seller = :seller');
+        $req->execute(array('category_id' => $category_id, 'seller' => $_SESSION['user']['id']));
+
+        foreach ($req->fetchAll() as $item) {
+            $list[] = new Product($item['id'], $item['name'], $item['description'], $item['price'], $item['image'], $item['category_id'], $item['created_at'], $item['seller'], $item['active']);
+        }
+
+        return $list;
+    }
+    public static function findByUserId($seller)
+    {
+        $list = [];
+        $db = DB::getInstance();
+        $req = $db->prepare('SELECT * FROM products WHERE seller = :seller');
+        $req->execute(array('seller' => $seller));
+
+        foreach ($req->fetchAll() as $item) {
+            $list[] = new Product($item['id'], $item['name'], $item['description'], $item['price'], $item['image'], $item['category_id'], $item['created_at'], $item['seller'], $item['active']);
+        }
+
+        return $list;
+    }
 
     public static function search($query) // Search product by name or description
     {
@@ -86,16 +112,18 @@ class Product
         $req->execute(array('id' => $id));
     }
 
-    public static function create($name, $description, $price, $image, $category_id) {
+    public static function create($name, $description, $price, $image, $category_id, $seller)
+    {
         $db = DB::getInstance();
-        $req = $db->prepare('INSERT INTO products (name, description, price, image, category_id) VALUES (:name, :description, :price, :image, :category_id)');
+        $req = $db->prepare('INSERT INTO products (name, description, price, image, category_id, seller) VALUES (:name, :description, :price, :image, :category_id, :seller)');
         $req->execute(
             array(
                 'name' => $name,
                 'description' => $description,
                 'price' => $price,
                 'image' => $image,
-                'category_id' => $category_id
+                'category_id' => $category_id,
+                'seller' => $seller
             )
         );
     }

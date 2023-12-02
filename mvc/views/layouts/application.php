@@ -76,6 +76,9 @@
 
                 <div id="auth" class="me-3 fs-4">
                     <?php if (isset($_SESSION['user'])): ?>
+                        <a href="<?php echo WEB_ROOT ?>/index.php?controller=product&action=list">Seller
+                            page</a>
+                        <a href="<?php echo WEB_ROOT ?>/index.php?controller=product">🛒</a>
                         <a class="auth-btn" href="<?php echo WEB_ROOT ?>/index.php?controller=user&action=logout">Logout</a>
                     <?php else: ?>
                         <a class="auth-btn"

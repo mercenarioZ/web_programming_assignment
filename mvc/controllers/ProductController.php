@@ -1,7 +1,6 @@
 <?php
 require_once('./mvc/core/BaseController.php');
 require_once('./mvc/models/Product.php');
-
 class ProductController extends BaseController
 {
     public function __construct()
@@ -10,7 +9,7 @@ class ProductController extends BaseController
     }
 
     // Get all products
-    public function index() 
+    public function index()
     {
         if (isset($_GET['c_id'])) {
             $category_id = $_GET['c_id'];
@@ -22,11 +21,24 @@ class ProductController extends BaseController
         $this->render('index', $data);
     }
 
+    public function list()
+    {
+        session_start();
+        if (isset($_GET['c_id'])) {
+            $category_id = $_GET['c_id'];
+            $products = Product::findByCategoryIdList($category_id);
+        } else {
+            $products = Product::findByUserId($_SESSION['user']['id']);
+        }
+        $data = array('products' => $products);
+        $this->render('list', $data);
+    }
+
     // Show detail product by id
-    public function show() 
+    public function show()
     {
         // session_start();
-        
+
         $id = isset($_GET['id']) ? $_GET['id'] : null;
         if ($id) {
             $product = Product::findById($id);
@@ -45,12 +57,16 @@ class ProductController extends BaseController
     // create new product
     public function store()
     {
+        session_start();
         $name = isset($_POST['name']) ? $_POST['name'] : null;
         $description = isset($_POST['description']) ? $_POST['description'] : null;
         $price = isset($_POST['price']) ? $_POST['price'] : null;
         $image = isset($_FILES['image']) ? $_FILES['image'] : null;
         $category_id = isset($_POST['category']) ? $_POST['category'] : null;
-
+        if (empty($_SESSION['user']['username'])) {
+            header('Location: index.php?controller=user&action=login');
+        }
+        $seller = $_SESSION['user']['id'];
         // Error handling
         $errors = array();
 
@@ -73,6 +89,10 @@ class ProductController extends BaseController
 
         if ($category_id === 'none' || !$category_id) {
             $errors['category'] = 'Category is required!';
+        }
+
+        if ($seller === 'none' || !$seller) {
+            $errors['seller'] = 'Seller is required!';
         }
 
         // Handle the image upload
@@ -98,10 +118,10 @@ class ProductController extends BaseController
             $imagePath = "assets/uploads/" . $file_name;
 
             // Store product to database
-            Product::create($name, $description, $price, $imagePath, $category_id);
+            Product::create($name, $description, $price, $imagePath, $category_id, $seller);
 
             // Redirect to product list page after creating new product
-            header('Location: index.php?controller=product'); 
+            header('Location: index.php?controller=product');
         } else {
             $this->render('create', array('errors' => $errors));
         }
@@ -128,7 +148,7 @@ class ProductController extends BaseController
     }
 
     // Display create new product form
-    public function create() 
+    public function create()
     {
         $this->render('create');
     }

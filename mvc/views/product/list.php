@@ -40,18 +40,18 @@
     <div class="container h-100">
         <div class="row w-100">
             <ul class="d-md-flex d-none for-md-scr">
-                <li><a href="<?php echo WEB_ROOT ?>/index.php?controller=product" class="btn">All</a></li>
+                <li><a href="<?php echo WEB_ROOT ?>/index.php?controller=product&action=list" class="btn">All</a></li>
                 <li><a class="btn"
-                        href="<?php echo WEB_ROOT ?>/index.php?controller=product&action=index&c_id=electronic">Consumer
+                        href="<?php echo WEB_ROOT ?>/index.php?controller=product&action=list&c_id=electronic">Consumer
                         Electronics</a></li>
                 <li><a class="btn"
-                        href="<?php echo WEB_ROOT ?>/index.php?controller=product&action=index&c_id=clothes">Clothes</a>
+                        href="<?php echo WEB_ROOT ?>/index.php?controller=product&action=list&c_id=clothes">Clothes</a>
                 </li>
                 <li><a class="btn"
-                        href="<?php echo WEB_ROOT ?>/index.php?controller=product&action=index&c_id=shoes">Shoes</a>
+                        href="<?php echo WEB_ROOT ?>/index.php?controller=product&action=list&c_id=shoes">Shoes</a>
                 </li>
                 <li><a class="btn"
-                        href="<?php echo WEB_ROOT ?>/index.php?controller=product&action=index&c_id=books">Books</a>
+                        href="<?php echo WEB_ROOT ?>/index.php?controller=product&action=list&c_id=books">Books</a>
                 </li>
             </ul>
 
@@ -63,16 +63,16 @@
 
                 <ul class="dropdown-menu p-2" aria-labelledby="dropdownMenuButton1">
                     <li><a class="dropdown-item"
-                            href="<?php echo WEB_ROOT ?>/index.php?controller=product&action=index&c_id=electronics">Consumer
+                            href="<?php echo WEB_ROOT ?>/index.php?controller=product&action=list&c_id=electronic">Consumer
                             Electronics</a></li>
                     <li><a class="dropdown-item"
-                            href="<?php echo WEB_ROOT ?>/index.php?controller=product&action=index&c_id=clothes">Clothes</a>
+                            href="<?php echo WEB_ROOT ?>/index.php?controller=product&action=list&c_id=clothes">Clothes</a>
                     </li>
                     <li><a class="dropdown-item"
-                            href="<?php echo WEB_ROOT ?>/index.php?controller=product&action=index&c_id=shoes">Shoes</a>
+                            href="<?php echo WEB_ROOT ?>/index.php?controller=product&action=list&c_id=shoes">Shoes</a>
                     </li>
                     <li><a class="dropdown-item"
-                            href="<?php echo WEB_ROOT ?>/index.php?controller=product&action=index&c_id=books">Books</a>
+                            href="<?php echo WEB_ROOT ?>/index.php?controller=product&action=list&c_id=books">Books</a>
                     </li>
                 </ul>
             </div>
