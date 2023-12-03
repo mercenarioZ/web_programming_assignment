@@ -19,6 +19,7 @@
 </style>
 
 <?php
+session_start();
 $image = $product->image;
 if (empty($image)) {
     $image = 'assets/uploads/default.jpg';
@@ -56,8 +57,19 @@ if (empty($image)) {
             <br>
 
             <p>
-                <a href="<?php echo WEB_ROOT ?>/index.php?controller=user&action=addItems&id=<?php echo $product->id ?>"
-                    class="btn btn-primary">Add to cart</a>
+                <?php
+                if (in_array($product->id, $_SESSION['user']['productsInCart'])) {
+                    $action = 'removeItem';
+                    $text = 'Remove from cart';
+                } else {
+                    $action = 'addItem';
+                    $text = 'Add to cart';
+                }
+                $url = WEB_ROOT . '/index.php?controller=user&action=' . $action . '&id=' . $product->id;
+                ?>
+                <a href="<?php echo $url ?>" class="btn btn-primary">
+                    <?php echo $text ?>
+                </a>
             </p>
         </div>
     </div>

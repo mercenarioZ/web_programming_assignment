@@ -143,7 +143,27 @@ class User
                 'email' => $email
             )
         );
-        header('Location: index.php?controller=page');
+        return $result;
+    }
+    public static function removeFromCartUser($email, $idProduct)
+    {
+        $db = DB::getInstance();
+        $user = User::findByEmail($email);
+        $productsInCart = json_decode($user->productsInCart, true);
+        if (!is_array($productsInCart)) {
+            $productsInCart = [];
+        }
+        $index = array_search($idProduct, $productsInCart);
+        if ($index !== false) {
+            unset($productsInCart[$index]);
+        }
+        $req = $db->prepare('UPDATE users SET productsInCart = :productsInCart WHERE email = :email');
+        $result = $req->execute(
+            array(
+                'productsInCart' => json_encode($productsInCart),
+                'email' => $email
+            )
+        );
         return $result;
     }
 }

@@ -72,7 +72,8 @@ class PageController extends BaseController
                 'username' => $username,
                 'email' => $email,
                 'role' => $_SESSION['user']['role'],
-                'amountItems' => $_SESSION['user']['amountItems']
+                'amountItems' => $_SESSION['user']['amountItems'],
+                'productsInCart' => $_SESSION['user']['productsInCart']
 
             );
             if ($user !== null) {

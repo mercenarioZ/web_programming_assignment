@@ -32,7 +32,8 @@ class UserController extends BaseController
                     'username' => $user->username,
                     'email' => $user->email,
                     'role' => $user->role,
-                    'amountItems' => count(json_decode($user->productsInCart, true))
+                    'amountItems' => count(json_decode($user->productsInCart, true)),
+                    'productsInCart' => json_decode($user->productsInCart, true)
                 );
 
                 header('Location: index.php?controller=page');
@@ -108,7 +109,8 @@ class UserController extends BaseController
                     'username' => $user->username,
                     'email' => $user->email,
                     'role' => $user->role,
-                    'amountItems' => count(json_decode($user->productsInCart, true))
+                    'amountItems' => count(json_decode($user->productsInCart, true)),
+                    'productsInCart' => json_decode($user->productsInCart, true)
                 );
                 // echo "<script>alert('Register successfully!')</script>";
                 header('Location: index.php?controller=page');
@@ -129,19 +131,47 @@ class UserController extends BaseController
         session_destroy();
         header('Location: index.php?controller=page');
     }
-    public function addItems()
+    public function addItem()
     {
         session_start();
-        User::addToCartUser($_SESSION['user']['email'], $_GET['id']);
+        // global $user;
         $user = User::findByEmail($_SESSION['user']['email']);
-        $_SESSION['user'] = array(
-            'id' => $user->id,
-            'username' => $user->username,
-            'email' => $user->email,
-            'role' => $user->role,
-            'amountItems' => count(json_decode($user->productsInCart, true))
-        );
-        header('Location: index.php?controller=page');
+        if (!in_array($_GET['id'], json_decode($user->productsInCart, true))) {
+            User::addToCartUser($_SESSION['user']['email'], $_GET['id']);
+            $user = User::findByEmail($_SESSION['user']['email']);
+            $_SESSION['user'] = array(
+                'id' => $user->id,
+                'username' => $user->username,
+                'email' => $user->email,
+                'role' => $user->role,
+                'amountItems' => count(json_decode($user->productsInCart, true)),
+                'productsInCart' => json_decode($user->productsInCart, true)
+            );
+            header('Location: index.php?controller=product');
+        } else {
+            header('Location: index.php?controller=page&action=error');
+        }
+    }
+    public function removeItem()
+    {
+        session_start();
+        // global $user;
+        $user = User::findByEmail($_SESSION['user']['email']);
+        if (in_array($_GET['id'], json_decode($user->productsInCart, true))) {
+            User::removeFromCartUser($_SESSION['user']['email'], $_GET['id']);
+            $user = User::findByEmail($_SESSION['user']['email']);
+            $_SESSION['user'] = array(
+                'id' => $user->id,
+                'username' => $user->username,
+                'email' => $user->email,
+                'role' => $user->role,
+                'amountItems' => count(json_decode($user->productsInCart, true)),
+                'productsInCart' => json_decode($user->productsInCart, true)
+            );
+            header('Location: index.php?controller=product');
+        } else {
+            header('Location: index.php?controller=page&action=error');
+        }
     }
     public function forgotPassword() // add to avoid error. delete later
     {
