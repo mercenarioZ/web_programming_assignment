@@ -37,7 +37,7 @@
 <section class="products-container mt-4">
     <div class="container h-100">
         <!-- Categories -->
-        <div class="row w-100">
+        <!-- <div class="row w-100">
             <ul class="d-md-flex d-none for-md-scr">
                 <li><a href="<?php echo WEB_ROOT ?>/index.php?controller=product&action=list" class="btn">All</a></li>
                 <li><a class="btn"
@@ -75,16 +75,16 @@
                     </li>
                 </ul>
             </div>
-        </div>
+        </div> -->
 
         <!-- Note -->
         <div class="alert alert-warning text-center fs-5">This page only displays products in your cart
             <a href="<?php echo WEB_ROOT ?>/index.php?controller=product&action=checkout"
-                class="btn btn-success">Checkout</a>
+                class="btn btn-warning">Checkout</a>
         </div>
 
         <!-- Products -->
-        <div class="row w-100">
+        <div class='row w-100'>
             <?php if ($products == null) {
                 echo "<h3 class='mt-3'>Empty</h3>";
             } else {
