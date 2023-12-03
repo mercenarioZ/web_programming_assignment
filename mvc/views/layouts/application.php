@@ -82,7 +82,7 @@
 
                         <!-- Cart icon -->
                         <span class="me-3" style="position: relative">
-                            <a href="<?php echo WEB_ROOT ?>/index.php?controller=product&action=checkout">🛒</a>
+                            <a href="<?php echo WEB_ROOT ?>/index.php?controller=product&action=cart">🛒</a>
                             <span
                                 style="display: flex; align-items: center; font-size: .8rem; font-weight: bold; position: absolute; bottom: -3; right: -5; background: rgba(255, 91, 0, 0.75); width: auto; height: 1rem; border-radius: 50%; color: #fff; padding: 6px 4px;">
                                 <?php echo isset($_SESSION['user']['amountItems']) ? $_SESSION['user']['amountItems'] : 0 ?>

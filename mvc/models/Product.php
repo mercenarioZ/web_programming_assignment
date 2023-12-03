@@ -50,6 +50,20 @@ class Product
         return new Product($item['id'], $item['name'], $item['description'], $item['price'], $item['image'], $item['category_id'], $item['created_at'], $item['seller'], $item['active']);
     }
 
+    public static function findProductsByIds($ids)
+    {
+        $list = [];
+        $db = DB::getInstance();
+        $idsString = implode(',', $ids);
+        $req = $db->query("SELECT * FROM products WHERE id IN ($idsString)");
+
+        foreach ($req->fetchAll() as $item) {
+            $list[] = new Product($item['id'], $item['name'], $item['description'], $item['price'], $item['image'], $item['category_id'], $item['created_at'], $item['seller'], $item['active']);
+        }
+
+        return $list;
+    }
+
     // Filter product by category
     public static function findByCategoryId($category_id)
     {
