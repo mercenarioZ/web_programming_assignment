@@ -54,6 +54,12 @@ class Product
     {
         $list = [];
         $db = DB::getInstance();
+
+        // Check if $ids is empty
+        if (count($ids) == 0) {
+            return $list;
+        }
+        
         $idsString = implode(',', $ids);
         $req = $db->query("SELECT * FROM products WHERE id IN ($idsString)");
 
