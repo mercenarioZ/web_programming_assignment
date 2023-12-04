@@ -166,4 +166,23 @@ class User
         );
         return $result;
     }
+
+    public static function updateCartUser($email, $ids)
+    {
+        $db = DB::getInstance();
+        $user = User::findByEmail($email);
+        $productsInCart = json_decode($user->productsInCart, true);
+        if (!is_array($productsInCart)) {
+            $productsInCart = [];
+        }
+        $req = $db->prepare('UPDATE users SET productsInCart = :productsInCart WHERE email = :email');
+        $result = $req->execute(
+            array(
+                'productsInCart' => json_encode($ids),
+                'email' => $email
+            )
+        );
+        return $result;
+
+    }
 }

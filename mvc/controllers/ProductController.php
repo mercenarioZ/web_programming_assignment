@@ -1,6 +1,7 @@
 <?php
 require_once('./mvc/core/BaseController.php');
 require_once('./mvc/models/Product.php');
+require_once('./mvc/models/User.php');
 class ProductController extends BaseController
 {
     public function __construct()
@@ -51,6 +52,21 @@ class ProductController extends BaseController
         } else {
             $products = Product::findProductsByIds($_SESSION['user']['productsInCart']);
         }
+        $ids = [];
+        foreach ($products as $product) {
+            $ids[] = $product->id;
+        }
+        // echo implode(',', $ids);
+        User::updateCartUser($_SESSION['user']['email'], $ids);
+        $user = User::findByEmail($_SESSION['user']['email']);
+        $_SESSION['user'] = array(
+            'id' => $user->id,
+            'username' => $user->username,
+            'email' => $user->email,
+            'role' => $user->role,
+            'amountItems' => count(json_decode($user->productsInCart, true)),
+            'productsInCart' => json_decode($user->productsInCart, true)
+        );
         $data = array('products' => $products);
         $this->render('cart', $data);
     }

@@ -148,7 +148,7 @@ class UserController extends BaseController
                 'amountItems' => count(json_decode($user->productsInCart, true)),
                 'productsInCart' => json_decode($user->productsInCart, true)
             );
-            header('Location: index.php?controller=product');
+            header('Location: index.php?controller=product&action=cart');
         } else {
             header('Location: index.php?controller=page&action=error');
         }
@@ -169,7 +169,7 @@ class UserController extends BaseController
                 'amountItems' => count(json_decode($user->productsInCart, true)),
                 'productsInCart' => json_decode($user->productsInCart, true)
             );
-            header('Location: index.php?controller=product');
+            header('Location: index.php?controller=product&action=cart');
         } else {
             header('Location: index.php?controller=page&action=error');
         }
