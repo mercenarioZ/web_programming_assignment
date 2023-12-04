@@ -185,5 +185,11 @@ class ProductController extends BaseController
     {
         $this->render('create');
     }
+
+    public function cancelSale()
+    {
+        Product::destroy($_GET['id']);
+        header('Location: index.php?controller=product');
+    }
 }
 ?>

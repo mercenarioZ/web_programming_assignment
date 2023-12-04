@@ -2,7 +2,7 @@
 $controllers = array(
     'page' => ['index', 'error', 'about', 'profile', 'changeUserInfo'],
     'user' => ['login', 'register', 'logout', 'forgotPassword', 'resetPassword', 'addItem', 'removeItem'],
-    'product' => ['index', 'show', 'store', 'filter', 'create', 'list', 'cart', 'checkout'],
+    'product' => ['index', 'show', 'store', 'filter', 'create', 'list', 'cart', 'checkout', 'cancelSale'],
 );
 
 if (!array_key_exists($controller, $controllers) || !in_array($action, $controllers[$controller])) {
