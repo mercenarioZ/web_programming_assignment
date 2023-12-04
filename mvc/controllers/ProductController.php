@@ -24,6 +24,10 @@ class ProductController extends BaseController
     public function list()
     {
         session_start();
+        if (!isset($_SESSION['user'])) {
+            header('Location: index.php?controller=user&action=login');
+            return;
+        }
         if (isset($_GET['c_id'])) {
             $category_id = $_GET['c_id'];
             $products = Product::findByCategoryIdList($category_id);
@@ -37,6 +41,10 @@ class ProductController extends BaseController
     public function cart()
     {
         session_start();
+        if (!isset($_SESSION['user'])) {
+            header('Location: index.php?controller=user&action=login');
+            return;
+        }
         if (isset($_GET['c_id'])) {
             $category_id = $_GET['c_id'];
             $products = Product::findByCategoryIdList($category_id);
@@ -49,6 +57,11 @@ class ProductController extends BaseController
 
     public function checkout()
     {
+        session_start();
+        if (!isset($_SESSION['user'])) {
+            header('Location: index.php?controller=user&action=login');
+            return;
+        }
         $data = array('products' => '');
         $this->render('checkout', $data);
     }
