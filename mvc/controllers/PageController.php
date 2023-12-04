@@ -53,6 +53,9 @@ class PageController extends BaseController
                 $errors['password'] = 'Password is required';
             }
 
+            if (!$password || strlen($password) < 6) {
+                $errors['password'] = 'Password least 6 characters';
+            }
 
             if (count($errors) > 0) {
                 $data = array('errors' => $errors, 'username' => $_SESSION['user']['username']);
@@ -64,7 +67,15 @@ class PageController extends BaseController
 
             // Update user info in the database
             $user = User::updateUserInfo($email, $username, $password);
+            session_start();
+            $_SESSION['user'] = array(
+                'username' => $username,
+                'email' => $email,
+                'role' => $_SESSION['user']['role'],
+                'amountItems' => $_SESSION['user']['amountItems'],
+                'productsInCart' => $_SESSION['user']['productsInCart']
 
+            );
             if ($user !== null) {
                 // User info updated successfully
                 // Redirect to a success page or perform any other actions

@@ -8,14 +8,16 @@ class User
     public $password;
     public $email;
     public $role;
+    public $productsInCart;
 
-    public function __construct($id, $username, $password, $email, $role)
+    public function __construct($id, $username, $password, $email, $role, $productsInCart)
     {
         $this->id = $id;
         $this->username = $username;
         $this->password = $password;
         $this->email = $email;
         $this->role = $role;
+        $this->productsInCart = $productsInCart;
     }
 
     // For admin
@@ -26,7 +28,7 @@ class User
         $req = $db->query('SELECT * FROM users');
 
         foreach ($req->fetchAll() as $item) {
-            $list[] = new User($item['id'], $item['username'], $item['password'], $item['email'], $item['role']);
+            $list[] = new User($item['id'], $item['username'], $item['password'], $item['email'], $item['role'], $item['productsInCart']);
         }
 
         return $list;
@@ -42,7 +44,7 @@ class User
         $req->execute(array('id' => $id));
         $item = $req->fetch();
 
-        return new User($item['id'], $item['username'], $item['password'], $item['email'], $item['role']);
+        return new User($item['id'], $item['username'], $item['password'], $item['email'], $item['role'], $item['productsInCart']);
     }
 
     public static function findByUsername($username)
@@ -53,7 +55,7 @@ class User
         $item = $req->fetch();
 
         if ($item) {
-            return new User($item['id'], $item['username'], $item['password'], $item['email'], $item['role']);
+            return new User($item['id'], $item['username'], $item['password'], $item['email'], $item['role'], $item['productsInCart']);
         } else {
             return null;
         }
@@ -67,7 +69,7 @@ class User
         $item = $req->fetch();
 
         if ($item) {
-            return new User($item['id'], $item['username'], $item['password'], $item['email'], $item['role']);
+            return new User($item['id'], $item['username'], $item['password'], $item['email'], $item['role'], $item['productsInCart']);
         } else {
             return null;
         }
@@ -86,7 +88,7 @@ class User
                 'username' => $username,
                 'password' => $hashedPassword,
                 'email' => $email,
-                'role' => $role
+                'role' => $role,
             )
         );
         // Return values to controller
@@ -100,7 +102,7 @@ class User
             $user = $req->fetch();
 
             if ($user) {
-                return new User($user['id'], $user['username'], $user['password'], $user['email'], $user['role']);
+                return new User($user['id'], $user['username'], $user['password'], $user['email'], $user['role'], $user['productsInCart']);
             } else {
                 return null;
             }
@@ -122,16 +124,46 @@ class User
                 'email' => $email
             )
         );
-        session_destroy();
-        session_start();
-        $_SESSION['user'] = array(
-            'username' => $username,
-            'email' => $email,
-            'role' => 0
-        );
-        // echo "<script>alert('Register successfully!')</script>";
         header('Location: index.php?controller=page');
         return $result;
     }
-
+    public static function addToCartUser($email, $idProduct)
+    {
+        $db = DB::getInstance();
+        $user = User::findByEmail($email);
+        $productsInCart = json_decode($user->productsInCart, true);
+        if (!is_array($productsInCart)) {
+            $productsInCart = [];
+        }
+        $productsInCart[] = $idProduct;
+        $req = $db->prepare('UPDATE users SET productsInCart = :productsInCart WHERE email = :email');
+        $result = $req->execute(
+            array(
+                'productsInCart' => json_encode($productsInCart),
+                'email' => $email
+            )
+        );
+        return $result;
+    }
+    public static function removeFromCartUser($email, $idProduct)
+    {
+        $db = DB::getInstance();
+        $user = User::findByEmail($email);
+        $productsInCart = json_decode($user->productsInCart, true);
+        if (!is_array($productsInCart)) {
+            $productsInCart = [];
+        }
+        $index = array_search($idProduct, $productsInCart);
+        if ($index !== false) {
+            unset($productsInCart[$index]);
+        }
+        $req = $db->prepare('UPDATE users SET productsInCart = :productsInCart WHERE email = :email');
+        $result = $req->execute(
+            array(
+                'productsInCart' => json_encode($productsInCart),
+                'email' => $email
+            )
+        );
+        return $result;
+    }
 }

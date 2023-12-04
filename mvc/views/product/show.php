@@ -16,9 +16,14 @@
     h4 {
         margin-top: .5rem;
     }
+
+    .btn.btn-primary {
+        margin-right: 10px;
+    }
 </style>
 
 <?php
+session_start();
 $image = $product->image;
 if (empty($image)) {
     $image = 'assets/uploads/default.jpg';
@@ -56,9 +61,31 @@ if (empty($image)) {
             <br>
 
             <p>
-                <a href="<?php echo WEB_ROOT ?>/index.php?controller=cart&action=add&id=<?php echo $product->id ?>"
-                    class="btn btn-primary">Add to cart</a>
+                <?php
+                // echo $_SESSION['user']['id'];
+                // echo $product->seller;
+                if ($_SESSION['user']['id'] != $product->seller) {
+                    if (in_array($product->id, $_SESSION['user']['productsInCart'])) {
+                        $action = 'removeItem';
+                        $text = 'Remove from cart';
+                    } else {
+                        $action = 'addItem';
+                        $text = 'Add to cart';
+                    }
+                    $url = WEB_ROOT . '/index.php?controller=user&action=' . $action . '&id=' . $product->id;
+                    echo '<a href="' . $url . '" class="btn btn-primary">' . $text . '</a>';
+                } else if ($_SESSION['user']['id'] === $product->seller) {
+                    $url = WEB_ROOT . '/index.php?controller=product&action=cancelSale&id=' . $product->id;
+                    echo '<a href="' . $url . '" class="btn btn-primary">' . 'Ajust Price' . '</a>';
+                    echo '<a href="' . $url . '" class="btn btn-primary">' . 'Cancel Sale' . '</a>';
+                }
+                ?>
             </p>
         </div>
     </div>
+</div>
+
+</p>
+</div>
+</div>
 </div>

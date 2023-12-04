@@ -24,6 +24,10 @@ class ProductController extends BaseController
     public function list()
     {
         session_start();
+        if (!isset($_SESSION['user'])) {
+            header('Location: index.php?controller=user&action=login');
+            return;
+        }
         if (isset($_GET['c_id'])) {
             $category_id = $_GET['c_id'];
             $products = Product::findByCategoryIdList($category_id);
@@ -32,6 +36,34 @@ class ProductController extends BaseController
         }
         $data = array('products' => $products);
         $this->render('list', $data);
+    }
+
+    public function cart()
+    {
+        session_start();
+        if (!isset($_SESSION['user'])) {
+            header('Location: index.php?controller=user&action=login');
+            return;
+        }
+        if (isset($_GET['c_id'])) {
+            $category_id = $_GET['c_id'];
+            $products = Product::findByCategoryIdList($category_id);
+        } else {
+            $products = Product::findProductsByIds($_SESSION['user']['productsInCart']);
+        }
+        $data = array('products' => $products);
+        $this->render('cart', $data);
+    }
+
+    public function checkout()
+    {
+        session_start();
+        if (!isset($_SESSION['user'])) {
+            header('Location: index.php?controller=user&action=login');
+            return;
+        }
+        $data = array('products' => '');
+        $this->render('checkout', $data);
     }
 
     // Show detail product by id
@@ -66,7 +98,8 @@ class ProductController extends BaseController
         if (empty($_SESSION['user']['username'])) {
             header('Location: index.php?controller=user&action=login');
         }
-        $seller = $_SESSION['user']['id'];
+        // $seller = $_SESSION['user']['id'];
+        $seller = isset($_SESSION['user']['id']) ? $_SESSION['user']['id'] : null;
         // Error handling
         $errors = array();
 
@@ -91,7 +124,7 @@ class ProductController extends BaseController
             $errors['category'] = 'Category is required!';
         }
 
-        if ($seller === 'none' || !$seller) {
+        if (!$seller) {
             $errors['seller'] = 'Seller is required!';
         }
 
@@ -151,6 +184,12 @@ class ProductController extends BaseController
     public function create()
     {
         $this->render('create');
+    }
+
+    public function cancelSale()
+    {
+        Product::destroy($_GET['id']);
+        header('Location: index.php?controller=product');
     }
 }
 ?>

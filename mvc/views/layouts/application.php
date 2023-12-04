@@ -50,7 +50,8 @@
                 color: #ff0000;
             }
 
-            .auth-btn, .seller-btn {
+            .auth-btn,
+            .seller-btn {
                 font-size: 1.15rem;
             }
 
@@ -76,14 +77,18 @@
 
                 <div id="auth" class="me-3 fs-4">
                     <?php if (isset($_SESSION['user'])): ?>
-                        <a class="seller-btn me-3" href="<?php echo WEB_ROOT ?>/index.php?controller=product&action=list">Seller page</a>
+                        <a class="seller-btn me-3"
+                            href="<?php echo WEB_ROOT ?>/index.php?controller=product&action=list">Seller page</a>
 
                         <!-- Cart icon -->
                         <span class="me-3" style="position: relative">
-                            <a href="<?php echo WEB_ROOT ?>/index.php?controller=product">🛒</a>
-                            <span style="display: flex; align-items: center; font-size: .8rem; font-weight: bold; position: absolute; bottom: -3; right: -5; background: rgba(255, 91, 0, 0.75); width: auto; height: 1rem; border-radius: 50%; color: #fff; padding: 6px 4px;">45</span>
+                            <a href="<?php echo WEB_ROOT ?>/index.php?controller=product&action=cart">🛒</a>
+                            <span
+                                style="display: flex; align-items: center; font-size: .8rem; font-weight: bold; position: absolute; bottom: -3; right: -5; background: rgba(255, 91, 0, 0.75); width: auto; height: 1rem; border-radius: 50%; color: #fff; padding: 6px 4px;">
+                                <?php echo isset($_SESSION['user']['amountItems']) ? $_SESSION['user']['amountItems'] : 0 ?>
+                            </span>
                         </span>
-                        
+
                         <a class="auth-btn" href="<?php echo WEB_ROOT ?>/index.php?controller=user&action=logout">Logout</a>
                     <?php else: ?>
                         <a class="auth-btn"
