@@ -134,6 +134,7 @@ class UserController extends BaseController
     public function addItem()
     {
         session_start();
+        
         // global $user;
         $user = User::findByEmail($_SESSION['user']['email']);
         if (!in_array($_GET['id'], json_decode($user->productsInCart, true))) {

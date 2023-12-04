@@ -15,6 +15,7 @@ class Cart
         $this->category_id = $category_id;
         $this->created_at = $created_at;
     }
+    
     public static function userCart($username)
     {
         $list = [];
@@ -28,6 +29,7 @@ class Cart
 
         return $list;
     }
+
     public static function create($id, $username, $item_id, $category_id, $created_at)
     {
         $db = DB::getInstance();
@@ -41,6 +43,7 @@ class Cart
             )
         );
     }
+
     public static function findByItemId($item_id)
     {
         $db = DB::getInstance();
@@ -53,6 +56,7 @@ class Cart
 
         return new Cart($item['id'], $item['username'], $item['item_id'], $item['category_id'], $item['created_at']);
     }
+
     // Filter product by category
     public static function findByCategoryId($category_id)
     {
@@ -67,6 +71,7 @@ class Cart
 
         return $list;
     }
+
     public static function search($query) // Search product by name or description
     {
         $list = [];
@@ -80,7 +85,9 @@ class Cart
 
         return $list;
     }
-    public static function destroy($id) // Delete item_id by id. This action will completely remove the item_id from database.
+
+    // Delete item_id by id. This action will completely remove the item_id from database.
+    public static function destroy($id)
     {
         $db = DB::getInstance();
         $req = $db->prepare('DELETE FROM carts WHERE id = :id');
