@@ -54,7 +54,7 @@
 
             <div class="w-60 mx-auto hero-box d-flex flex-column align-items-center">
                 <h1 style="font-size: 2.5rem; margin-bottom: 12px;">Hello,
-                    <?php echo isset($_SESSION['user']['username']) ? $_SESSION['user']['username'] : 'guest' ?>
+                    <strong><?php echo isset($_SESSION['user']['username']) ? $_SESSION['user']['username'] : 'guest' ?></strong>
                 </h1>
                 <button class="btn btn-primary">
                     <a class="text-light" href="<?php echo WEB_ROOT ?>/index.php?controller=product">Shop now</a>

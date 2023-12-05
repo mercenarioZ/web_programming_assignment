@@ -44,7 +44,7 @@
 
                 <tbody>
                     <?php if ($products == null) {
-                        echo "<h3 class='mt-3'>Empty</h3>";
+                        echo "<tr><td colspan='4' class='text-center'>No products in cart</td></tr>";
                     } else {
 
                         foreach ($products as $product): ?>
