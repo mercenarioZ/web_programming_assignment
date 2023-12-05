@@ -4,11 +4,10 @@
 Build a simple sales website using HTML, CSS, JS and PHP. The website should have the following features:
 - A home page that displays a list of products, search bar and website information
 - A product page that displays the details of a product
-- A shopping cart page that displays the items in the cart
+- A shopping cart page that displays the items in the cart added by the user
 - A page that allows the seller to review all the products that have been posted by that seller
 - Authentication (login/logout, register)
-- Authorization (admin/user)
-- Functionality to edit/delete a product
+- Functionality to delete a product
 - Functionality to add/remove items to/from the cart
 - Functionality to post a new product (admin has to approve before it is displayed) (optional)
 

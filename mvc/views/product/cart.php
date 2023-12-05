@@ -19,6 +19,17 @@
     thead {
         font-weight: bold;
     }
+
+    #product-image {
+        display: inline-block;
+        width: 55px;
+        height: 55px;
+    }
+
+    #product-image:hover {
+        border: 1px solid #ff0000;
+        border-radius: 5px;
+    }
 </style>
 
 <section class="products-container mt-4">
@@ -50,7 +61,16 @@
                         foreach ($products as $product): ?>
                             <tr>
                                 <td>
-                                    <?php echo $product->name; ?>
+                                    <a <?php if (!isset($product->image)) {
+                                        $product->image = "assets/uploads/default.jpg";
+                                    }
+                                    ?>
+                                        href="<?php echo WEB_ROOT ?>/index.php?controller=product&action=show&id=<?php echo $product->id ?>">
+                                        <img id="product-image" src="<?php echo $product->image ?>" alt="image">
+                                    </a>
+                                    <span class="ms-2">
+                                        <?php echo $product->name; ?>
+                                    </span>
                                 </td>
                                 <td>
                                     <?php echo $product->description; ?>
@@ -60,7 +80,6 @@
                                 </td>
                                 <td>
                                     <?php if ($_SESSION['user']['id'] != $product->seller) {
-                                        // echo implode(" ", $_SESSION['user']['productsInCart']);
                                         $url = WEB_ROOT . '/index.php?controller=user&action=removeItem&id=' . $product->id;
                                         echo '<a href="' . $url . '" class="btn btn-danger">' . 'Remove' . '</a>';
                                     }
