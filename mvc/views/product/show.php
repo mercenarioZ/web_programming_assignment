@@ -70,12 +70,12 @@ if (empty($image)) {
                         $action = 'addItem';
                         $text = 'Add to cart';
                     }
-                    
+
                     $url = WEB_ROOT . '/index.php?controller=user&action=' . $action . '&id=' . $product->id;
                     echo '<a href="' . $url . '" class="btn btn-primary">' . $text . '</a>';
                 } else if ($_SESSION['user']['id'] === $product->seller) {
                     $url = WEB_ROOT . '/index.php?controller=product&action=cancelSale&id=' . $product->id;
-                    echo '<a href="' . $url . '" class="btn btn-primary">' . 'Adjust Price' . '</a>';
+                    // echo '<a href="' . $url . '" class="btn btn-primary">' . 'Adjust Price' . '</a>';
                     echo '<a href="' . $url . '" class="btn btn-primary">' . 'Cancel Sale' . '</a>';
                 }
                 ?>

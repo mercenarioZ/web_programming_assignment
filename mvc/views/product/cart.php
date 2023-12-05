@@ -3,12 +3,15 @@
         width: 100%;
     }
 
-    table, th, td {
+    table,
+    th,
+    td {
         border: 1px solid black;
         border-collapse: collapse;
     }
 
-    th, td {
+    th,
+    td {
         padding: 15px;
         text-align: left;
     }
@@ -56,7 +59,12 @@
                                     <?php echo $product->price; ?>
                                 </td>
                                 <td>
-                                    <button class="btn btn-danger">Remove</button>
+                                    <?php if ($_SESSION['user']['id'] != $product->seller) {
+                                        // echo implode(" ", $_SESSION['user']['productsInCart']);
+                                        $url = WEB_ROOT . '/index.php?controller=user&action=removeItem&id=' . $product->id;
+                                        echo '<a href="' . $url . '" class="btn btn-danger">' . 'Remove' . '</a>';
+                                    }
+                                    ?>
                                 </td>
                             </tr>
                         <?php endforeach;

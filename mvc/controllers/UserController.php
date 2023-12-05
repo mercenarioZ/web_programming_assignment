@@ -134,8 +134,6 @@ class UserController extends BaseController
     public function addItem()
     {
         session_start();
-        
-        // global $user;
         $user = User::findByEmail($_SESSION['user']['email']);
         if (!in_array($_GET['id'], json_decode($user->productsInCart, true))) {
             User::addToCartUser($_SESSION['user']['email'], $_GET['id']);
@@ -156,7 +154,6 @@ class UserController extends BaseController
     public function removeItem()
     {
         session_start();
-        // global $user;
         $user = User::findByEmail($_SESSION['user']['email']);
         if (in_array($_GET['id'], json_decode($user->productsInCart, true))) {
             User::removeFromCartUser($_SESSION['user']['email'], $_GET['id']);

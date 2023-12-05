@@ -204,8 +204,14 @@ class ProductController extends BaseController
 
     public function cancelSale()
     {
-        Product::destroy($_GET['id']);
-        header('Location: index.php?controller=product');
+        session_start();
+        $product = Product::findById($_GET['id']);
+        if ($_SESSION['user']['id'] === $product->seller) {
+            Product::destroy($_GET['id']);
+            header('Location: index.php?controller=product');
+        } else {
+            header('Location: index.php?controller=page&action=error');
+        }
     }
 }
 ?>
