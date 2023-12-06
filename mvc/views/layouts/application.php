@@ -39,6 +39,7 @@
             #header {
                 text-align: center;
                 font-size: 1.5rem;
+                overflow: hidden;
             }
 
             a {
@@ -66,7 +67,7 @@
     <body>
         <nav id="header">
             <div class="d-flex justify-content-between me-2">
-                <div class="ms-3 fw-bold fs-2">
+                <div class="ms-3 fw-bold fs-4">
                     <a href="<?php echo WEB_ROOT ?>/index.php">
                         <img style="height: 50px; width: auto; margin-bottom: .5rem" src="assets/images/logo.svg" />
                         <span style="color: #FF5B00">

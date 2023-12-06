@@ -85,7 +85,12 @@ class ProductController extends BaseController
     // Show detail product by id
     public function show()
     {
-        // session_start();
+        session_start();
+
+        if (!$_SESSION['user']['id']) {
+            header('Location: index.php?controller=user&action=login');
+            return;
+        }
 
         $id = isset($_GET['id']) ? $_GET['id'] : null;
         if ($id) {
